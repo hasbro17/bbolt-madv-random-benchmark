@@ -179,13 +179,9 @@ In short: with a 4 MiB readahead, each fault pulls in so much extra data that it
 
 etcd starts on a database holding 1,050,000 old revisions, the memory limit is applied, and one `etcdctl compact` removes them. The time is taken from etcd's own "finished scheduled compaction" log line.
 
-*How to read the chart:* Compaction time for every pair in three setups: with the memory limit, without it, and with the memory limit and the kernel's MGLRU switched off. Each grey line joins one pair: control (orange, left end) and treatment (blue, right end). Lower is better.
+*How to read the chart:* Compaction time in three setups: with the memory limit, without it, and with the memory limit and the kernel's MGLRU switched off. Each bar and its number is the median run of one build; each dot is one run. Lower is better.
 
 ![s3a-compaction](charts/s3a-compaction.png)
-
-*How to read the chart:* Major page faults during compaction (pages read back from disk) for every pair, in the same three setups. Each grey line joins one pair: control (orange, left end) and treatment (blue, right end). Lower is better.
-
-![s3a-faults](charts/s3a-faults.png)
 
 10 pairs, memory limit 5.09 GiB.
 
@@ -216,7 +212,7 @@ The same compaction with no memory limit. Both builds compact equally fast, so t
 
 900,000 writes at a target rate of 1,000 per second (about 15 minutes) with a compaction every 60 seconds and background point reads, under the memory limit. Each run makes the same number of writes, so a slower run lasts longer and goes through more compaction rounds: compare per-compaction times and latencies, not totals. Neither build reaches the 1,000 per second target even without a memory limit (about 860 per second, see below); that is a limit of this setup and the same for both.
 
-*How to read the chart:* Mean compaction time per run with compaction every minute under writes, with and without the memory limit. Each grey line joins one pair: control (orange, left end) and treatment (blue, right end). Lower is better.
+*How to read the chart:* Every compaction of every run, in the order they ran, with the memory limit (left) and without it (right). Each line is one run: orange for control, blue for treatment. The benchmark requests a compaction every 60 seconds. Lower is better.
 
 ![s3b-compaction](charts/s3b-compaction.png)
 
@@ -234,6 +230,8 @@ The same compaction with no memory limit. Both builds compact equally fast, so t
 | Compaction rounds per run | 20 | 17 | -15.0% | -15.0% to -15.0% |
 | Major page faults per second | 392/s | 0.00/s | -100.0% | -100.0% to -100.0% |
 | Disk read per second | 1.57 MiB/s | 0.00 MiB/s | -100.0% | -100.0% to -100.0% |
+
+In every control run the stall is the first compaction after the memory limit is applied (236 s to 238 s). After it, control's next four compactions are shorter than treatment's at the same point (5.4 s to 6.2 s, against 13.6 s to 18.7 s for treatment), and then both builds settle at about 19 s per compaction.
 
 ## S3b without a memory limit
 
@@ -255,11 +253,13 @@ The same workload with no memory limit: both builds are equal.
 
 **Result:** No difference. Across 60 workload mixes, median change against control is +0.3% for reads and +0.3% for writes; every mix within 4.5%.
 
-etcd's `tools/rw-heatmaps/rw-benchmark.sh`, unmodified: workload mixes of read:write ratios from 1:8 to 8:1, values of 256 B, 1 KiB and 4 KiB, and 32 to 256 clients, each starting from an empty database, with plenty of memory. Values are treatment against control for the mean throughput of each mix.
+etcd's `tools/rw-heatmaps/rw-benchmark.sh`, unmodified: workload mixes of read:write ratios from 1:8 to 8:1, values of 256 B, 1 KiB and 4 KiB, and 32 to 256 clients, each starting from an empty database, with plenty of memory. The script runs each mix 5 times per build and reports the mean throughput; values are treatment against control for that mean.
 
-*How to read the chart:* Each dot is one workload mix: treatment's mean throughput relative to control, one row for reads and one for writes. The shaded band is ±5%; dots on the 1x line mean no change.
+The chart uses the layout of the comparison images from etcd's `tools/rw-heatmaps`. That tool itself could not draw this sweep: it only plots value sizes in 2x steps, and this reduced sweep skips 512 B and 2 KiB (`docs/METHODS.md`, item 4).
 
-![s4-cells](charts/s4-cells.png)
+*How to read the chart:* Each square is one workload mix, and its number is treatment's mean throughput relative to control. Each row of panels is one read:write ratio; inside a panel, columns are client counts and rows are value sizes. Left panels show reads, right panels writes; both come from the same runs of a mix. The colour scale is the same in every panel and runs from -5% (red, treatment lower) to +5% (blue, treatment higher), the noise band: pale squares are close to no change. A real effect would show up as a block of one colour, such as a whole row, column or panel.
+
+![s4-heatmap](charts/s4-heatmap.png)
 
 | 60 workload mixes | Treatment vs control (median over mixes) | Range over mixes |
 |---|--:|--:|
@@ -348,7 +348,7 @@ The S3a compaction at three memory limits on one VM, one run per build at each l
 - **When the memory limit is applied.** The limit is set once etcd is running, which models a running etcd that comes under memory pressure. With the limit in place from the start, startup itself becomes much slower (see "More results").
 - **Random point reads** use `benchmark stm` with one key per transaction and no writes. `benchmark range` and `txn-mixed` always read the same keys, so they never touch random pages of the database.
 - **Latencies left out.** Two steps run `benchmark stm` at a fixed rate (the 10-minute pass in S2, the background reads in S3b). `stm` waits for its rate limiter inside the timed part of each request, so with `--rate` the recorded latency is mostly that wait (clients divided by rate, for example 64 / 2,000 per second = 32 ms, the same for both builds). Only their throughput is shown, which tells whether each build kept up with the target rate. `put` and `range` start the clock after the wait, so their latencies are shown.
-- **How S3b is judged.** S3b uses the mean compaction time per run plus major faults, not the median: control's damage is a few stalled compactions that a median hides. This was decided after 2 of 5 pairs, before the rest ran (`docs/METHODS.md`). Median, mean and slowest are all in the table.
+- **How S3b is judged.** S3b uses the mean compaction time per run plus major faults, not the median: control's damage is one stalled compaction per run (the first after the memory limit is applied) that a median hides. This was decided after 2 of 5 pairs, before the rest ran (`docs/METHODS.md`). Median, mean and slowest are all in the table.
 - **Same-VM comparisons only.** Absolute numbers differ between VMs (control's S3a compaction took 771 to 1,123 s on the three VMs in the check before the main runs), so every comparison is within one VM.
 
 ## Appendix: environment and method

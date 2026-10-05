@@ -284,29 +284,63 @@ GROUP_LABELS = {"S3a": "With memory limit", "S3a-ref": "No memory limit",
                 "S3b-ref": "No memory limit"}
 
 
-def paired_chart(agg, outdir, scenarios, metric, title, ylabel, name):
+INK, INK_MUTED = "#1f2328", "#52514e"
+
+
+def bar_chart(agg, outdir, scenarios, metric, title, ylabel, name):
+    """Median per build as a bar, every run as a dot on it, the median written above the bar."""
     present = [s for s in scenarios if scen(agg, s) and metric in agg["scenarios"][s]["summary"]]
     if not present:
         return None
     fig, ax = plt.subplots(figsize=(1.9 + 1.9 * len(present), 3.6))
+    w = 0.34
+    top, labels = 0, []
     for i, s in enumerate(present):
-        pairs = agg["scenarios"][s]["pairs"]
-        for p in pairs:
-            c = p["control"]["metrics"].get(metric)
-            t = p["treatment"]["metrics"].get(metric)
-            if c is None or t is None:
-                continue
-            ax.plot([i - 0.15, i + 0.15], [c, t], color=C_BAND, lw=0.8, zorder=1)
-            ax.scatter([i - 0.15], [c], color=C_CTRL, s=22, zorder=2)
-            ax.scatter([i + 0.15], [t], color=C_TRT, s=22, zorder=2)
+        summ = agg["scenarios"][s]["summary"][metric]
+        for off, v, col in ((-w / 2 - 0.02, "control", C_CTRL), (w / 2 + 0.02, "treatment", C_TRT)):
+            med = summ[v]["median"]
+            runs = [p[v]["metrics"].get(metric) for p in agg["scenarios"][s]["pairs"]]
+            runs = [r for r in runs if r is not None]
+            ax.bar(i + off, med, w, color=col, alpha=0.35, lw=0, zorder=1)
+            ax.scatter([i + off + (k % 5 - 2) * 0.03 for k in range(len(runs))], runs, color=col, s=16,
+                       edgecolors="#ffffff", linewidths=0.6, zorder=2)
+            labels.append((i + off, max(runs + [med]), fmt(med, " s")))
+            top = max(top, max(runs + [med]))
+    for x, y, txt in labels:
+        ax.text(x, y + top * 0.025, txt, ha="center", va="bottom", fontsize=8.5, color=INK, zorder=3)
+    ax.set_ylim(0, top * 1.15)
     ax.set_xticks(range(len(present)), [GROUP_LABELS.get(p, p) for p in present], fontsize=9)
     ax.set_ylabel(ylabel)
     ax.set_title(title, fontsize=11, loc="left")
     ax.scatter([], [], color=C_CTRL, label="control (MADV_RANDOM)")
     ax.scatter([], [], color=C_TRT, label="treatment (removed)")
     ax.legend(frameon=False, fontsize=8, loc="upper center")
-    ax.set_ylim(bottom=0)
     ax.spines[["top", "right"]].set_visible(False)
+    return save(fig, outdir, name)
+
+
+def compaction_rounds_chart(agg, outdir, scenarios, title, name):
+    """Every compaction of every run, in order: one thin line per run, one panel per setup."""
+    present = [s for s in scenarios if scen(agg, s)
+               and any("_compactions_s" in p["control"]["metrics"] for p in agg["scenarios"][s]["pairs"])]
+    if not present:
+        return None
+    fig, axes = plt.subplots(1, len(present), figsize=(3.4 * len(present) + 0.4, 3.6), sharey=True, squeeze=False)
+    for ax, s in zip(axes[0], present):
+        for v, col in (("control", C_CTRL), ("treatment", C_TRT)):
+            for p in agg["scenarios"][s]["pairs"]:
+                xs = p[v]["metrics"].get("_compactions_s") or []
+                ax.plot(range(1, len(xs) + 1), xs, color=col, lw=1, alpha=0.7, marker="o", ms=2.5, zorder=2)
+        ax.set_title(GROUP_LABELS.get(s, s), fontsize=9.5)
+        ax.set_xlabel("compaction round", fontsize=8.5)
+        ax.spines[["top", "right"]].set_visible(False)
+        ax.set_ylim(bottom=0)
+    axes[0][0].set_ylabel("seconds per compaction")
+    axes[0][0].plot([], [], color=C_CTRL, label="control (MADV_RANDOM), one line per run")
+    axes[0][0].plot([], [], color=C_TRT, label="treatment (removed), one line per run")
+    axes[0][0].legend(frameon=False, fontsize=8, loc="upper right")
+    fig.suptitle(title, fontsize=11, x=0.02, ha="left")
+    fig.tight_layout()
     return save(fig, outdir, name)
 
 
@@ -374,48 +408,99 @@ def readahead_chart(supp, outdir):
     return save(fig, outdir, "s2-tight-readahead")
 
 
+# Diverging scale for the S4 heatmap: red (treatment lower) to blue (treatment higher)
+# through a neutral gray, fixed at +-EQUIV_MIN for every panel so small differences stay pale.
+S4_DIVERGING = ["#b8312f", "#f0efec", "#1c5cab"]  # linear: +-1% stays pale, +-5% is the full pole
+
+
+def _mix(ratio):
+    """rw-benchmark.sh read:write ratio (".1250", "8") as "1:8" / "8:1"."""
+    r = float(ratio)
+    return f"1:{1 / r:g}" if r < 1 else f"{r:g}:1"
+
+
 def s4_chart(agg, outdir):
+    """Treatment / control per workload mix, laid out like tools/rw-heatmaps' comparison:
+    one panel per read:write ratio, client count across, value size up."""
     s = scen(agg, "S4")
     if not s or not s["summary"].get("cells.read_qps"):
         return None
-    fig, ax = plt.subplots(figsize=(6.4, 3.0))
-    # Neutral colours: here both rows are treatment / control, not one build each.
-    for j, (f, col) in enumerate((("read_qps", "#4a5560"), ("write_qps", "#8a5a9e"))):
-        vals = s["summary"][f"cells.{f}"]["ratios"]
-        ax.scatter(vals, [j + (k % 7 - 3) * 0.04 for k in range(len(vals))], color=col, s=12, alpha=0.8)
-    ax.axvline(1.0, color="#333", lw=0.8)
-    ax.axvspan(1 - EQUIV_MIN, 1 + EQUIV_MIN, color=C_BAND, alpha=0.18, lw=0)
-    ax.set_yticks([0, 1], ["Read throughput", "Write throughput"])
-    ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda x, _: f"{x:g}x"))
-    ax.set_xlabel("treatment / control (1x = no change)")
-    ax.set_title("rw-benchmark.sh: treatment vs control, one dot per workload mix", fontsize=11, loc="left")
-    ax.spines[["top", "right"]].set_visible(False)
-    return save(fig, outdir, "s4-cells")
+    per = {}
+    for p in s["pairs"]:
+        for cell, r in (p.get("cell_ratio") or {}).items():
+            kv = dict(x.split("=", 1) for x in cell.split(","))
+            key = (kv["ratio"], int(kv["conn"]), int(kv["value"]))
+            for f in ("read_qps", "write_qps"):
+                if r.get(f):
+                    per.setdefault((f, *key), []).append(r[f])
+    ratios = sorted({k[1] for k in per}, key=float)
+    conns = sorted({k[2] for k in per})
+    values = sorted({k[3] for k in per})
+    cmap = matplotlib.colors.LinearSegmentedColormap.from_list("s4", S4_DIVERGING)
+    norm = matplotlib.colors.Normalize(-EQUIV_MIN * 100, EQUIV_MIN * 100)
+    fig, axes = plt.subplots(len(ratios), 2, figsize=(7.0, 1.25 * len(ratios) + 1.4), squeeze=False)
+    for col, (f, name) in enumerate((("read_qps", "Read throughput"), ("write_qps", "Write throughput"))):
+        for row, ratio in enumerate(ratios):
+            ax = axes[row][col]
+            grid = [[(statistics.median(per[(f, ratio, c, v)]) - 1) * 100 if per.get((f, ratio, c, v)) else float("nan")
+                     for c in conns] for v in values]
+            ax.pcolormesh(grid, cmap=cmap, norm=norm, edgecolors="#ffffff", linewidth=2)
+            for i, line in enumerate(grid):
+                for j, d in enumerate(line):
+                    if d == d:  # not NaN
+                        txt = "0.0%" if abs(d) < 0.05 else f"{d:+.1f}%"
+                        ax.text(j + 0.5, i + 0.5, txt, ha="center", va="center", fontsize=7.5,
+                                color="#ffffff" if abs(d) > 0.6 * EQUIV_MIN * 100 else "#1f2328")
+            ax.set_xticks([j + 0.5 for j in range(len(conns))], [str(c) for c in conns] if row == len(ratios) - 1 else [],
+                          fontsize=8)
+            ax.set_yticks([i + 0.5 for i in range(len(values))],
+                          [f"{v // 1024} KiB" if v >= 1024 else f"{v} B" for v in values] if col == 0 else [], fontsize=8)
+            ax.tick_params(length=0)
+            for sp in ax.spines.values():
+                sp.set_visible(False)
+            if col == 0:
+                ax.set_ylabel(f"reads:writes\n{_mix(ratio)}", fontsize=8.5, rotation=0, ha="right", va="center",
+                              labelpad=28)
+            if row == 0:
+                ax.set_title(name, fontsize=10)
+        axes[-1][col].set_xlabel("clients", fontsize=8.5)
+    fig.suptitle("rw-benchmark.sh: treatment vs control, mean throughput per workload mix", fontsize=11, x=0.02,
+                 ha="left")
+    fig.tight_layout(rect=(0, 0.07, 1, 0.97))
+    cax = fig.add_axes((0.3, 0.03, 0.4, 0.015))
+    cb = fig.colorbar(matplotlib.cm.ScalarMappable(norm=norm, cmap=cmap), cax=cax, orientation="horizontal")
+    cb.set_ticks([-5, -2.5, 0, 2.5, 5], labels=["-5%", "-2.5%", "0", "+2.5%", "+5%"])
+    cb.ax.tick_params(labelsize=8)
+    cb.outline.set_visible(False)
+    cb.set_label("treatment vs control (red: treatment lower, blue: treatment higher)", fontsize=8)
+    return save(fig, outdir, "s4-heatmap")
 
 # --------------------------------------------------------------------------- tables
 
 
 def caption(c):
     """A short "how to read this chart" line placed above each chart."""
-    pair_lines = ("Each grey line joins one pair: control (orange, left end) and treatment (blue, right end). "
-                  "Lower is better.")
     ratio_rows = ("Each row is one kind of read. The dot is treatment's p99 latency relative to control (median "
                   "pair) and the line spans all pairs; the shaded band is ±5%. Left of 1x means treatment is faster, "
                   "right of 1x slower.")
     text = {
         "s1-p99": ratio_rows,
         "s2-p99": ratio_rows,
-        "s3a-compaction": "Compaction time for every pair in three setups: with the memory limit, without it, and "
-                          "with the memory limit and the kernel's MGLRU switched off. " + pair_lines,
-        "s3a-faults": "Major page faults during compaction (pages read back from disk) for every pair, in the same "
-                      "three setups. " + pair_lines,
-        "s3b-compaction": "Mean compaction time per run with compaction every minute under writes, with and without "
-                          "the memory limit. " + pair_lines,
+        "s3a-compaction": "Compaction time in three setups: with the memory limit, without it, and with the memory "
+                          "limit and the kernel's MGLRU switched off. Each bar and its number is the median run of "
+                          "one build; each dot is one run. Lower is better.",
+        "s3b-compaction": "Every compaction of every run, in the order they ran, with the memory limit (left) and "
+                          "without it (right). Each line is one run: orange for control, blue for treatment. The "
+                          "benchmark requests a compaction every 60 seconds. Lower is better.",
         "s2-tight-readahead": "Each row is one measure under the tighter limit. The dots show treatment relative to "
                               "control (median pair, line = all pairs), once with 4 MiB readahead (purple) and once "
                               "with 128 KiB (blue). Left of 1x means treatment is faster.",
-        "s4-cells": "Each dot is one workload mix: treatment's mean throughput relative to control, one row for reads "
-                    "and one for writes. The shaded band is ±5%; dots on the 1x line mean no change.",
+        "s4-heatmap": "Each square is one workload mix, and its number is treatment's mean throughput relative to "
+                      "control. Each row of panels is one read:write ratio; inside a panel, columns are client counts "
+                      "and rows are value sizes. Left panels show reads, right panels writes; both come from the same "
+                      "runs of a mix. The colour scale is the same in every panel and runs from -5% (red, treatment "
+                      "lower) to +5% (blue, treatment higher), the noise band: pale squares are close to no change. A "
+                      "real effect would show up as a block of one colour, such as a whole row, column or panel.",
     }.get(c["name"], "")
     if c.get("log"):
         text += " The axis is logarithmic, so equal distances mean equal ratios (0.5x and 2x are the same distance from 1x)."
@@ -779,6 +864,49 @@ def result_lines(agg, supp, vs):
     return out
 
 
+def s3b_rounds(agg):
+    """Shape of S3b's compaction rounds under the memory limit, from every compaction of every run:
+    whether each control run has exactly one stall (a compaction over twice its run's median) and it
+    is the first; how many rounds after it control stays well below treatment; where both settle."""
+    s = scen(agg, "S3b")
+    runs = {v: [p[v]["metrics"].get("_compactions_s") or [] for p in (s or {}).get("pairs", [])]
+            for v in ("control", "treatment")}
+    if not s or not all(runs["control"]) or not all(runs["treatment"]):
+        return None
+    stalls = [[i for i, x in enumerate(r) if x > 2 * statistics.median(r)] for r in runs["control"]]
+    first_only = all(st == [0] for st in stalls)
+    out = {"first_only": first_only, "stall_lo": min(r[0] for r in runs["control"]),
+           "stall_hi": max(r[0] for r in runs["control"])}
+    n = min(len(r) for v in runs.values() for r in v)
+
+    def med(v, i):
+        return statistics.median(r[i] for r in runs[v])
+    k = 1
+    while k < n and med("control", k) < 0.6 * med("treatment", k):
+        k += 1
+    if first_only and k > 1:
+        c = [r[i] for r in runs["control"] for i in range(1, k)]
+        t = [r[i] for r in runs["treatment"] for i in range(1, k)]
+        tail = [x for v in runs.values() for r in v for x in r[-5:]]
+        out.update(shorter=k - 1, c_lo=min(c), c_hi=max(c), t_lo=min(t), t_hi=max(t), settle=statistics.median(tail))
+    return out
+
+
+def s3b_rounds_text(r):
+    """Plain description of the S3b chart's shape; states what the data shows, gives no cause."""
+    if not r or not r["first_only"]:
+        return ""
+    text = (f"In every control run the stall is the first compaction after the memory limit is applied "
+            f"({fmt(r['stall_lo'], ' s')} to {fmt(r['stall_hi'], ' s')}).")
+    if r.get("shorter"):
+        words = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+        n = words[r["shorter"]] if r["shorter"] < len(words) else str(r["shorter"])
+        text += (f" After it, control's next {n} compactions are shorter than treatment's at the same point "
+                 f"({r['c_lo']:.1f} s to {r['c_hi']:.1f} s, against {r['t_lo']:.1f} s to {r['t_hi']:.1f} s for "
+                 f"treatment), and then both builds settle at about {r['settle']:.0f} s per compaction.")
+    return text
+
+
 def short_answer(vs, supp):
     """The bottom line in one sentence, from the verdicts and the readahead follow-up."""
     p = {v["id"]: v["pass"] for v in vs}
@@ -827,6 +955,15 @@ def restructure(report_md):
 REPO_URL = "https://github.com/hasbro17/bbolt-madv-random-benchmark"
 PAGES_URL = "https://hasbro17.github.io/bbolt-madv-random-benchmark/"
 RAW_URL = REPO_URL + "/releases/tag/raw-data-2026-10-03"
+S2_TITLE = "S2: reads under memory pressure"
+TREATMENT_SHA = "decad5af77c7e1e6fc5def24b372c869e6ea685f"  # branch remove-madv-random-v1.5 on hasbro17/bbolt
+
+
+def gh_anchor(title):
+    """GitHub's heading anchor: lowercase, punctuation dropped, spaces to hyphens."""
+    return re.sub(r"[^a-z0-9 -]", "", title.lower()).replace(" ", "-")
+
+
 REFS = {"agg": "data/aggregate.json", "log": "docs/METHODS.md",
         "inputs": "`docs/VERSIONS.md`, `docs/DATASET.md`, `docs/PRESSURE.md`",
         "raw": f"Raw per-run data, including failed and superseded attempts, is in the [raw-data release]({RAW_URL}).",
@@ -836,12 +973,10 @@ REFS = {"agg": "data/aggregate.json", "log": "docs/METHODS.md",
 def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
     vs = verdicts(agg, supp)
     charts = [c for c in (
-        paired_chart(agg, outdir, ["S3a", "S3a-ref", "S3a-mglru-off"], "compaction_s",
-                     "One large compaction: time per pair", "seconds", "s3a-compaction"),
-        paired_chart(agg, outdir, ["S3a", "S3a-ref", "S3a-mglru-off"], "compaction_majflt",
-                     "One large compaction: major page faults per pair", "major page faults", "s3a-faults"),
-        paired_chart(agg, outdir, ["S3b", "S3b-ref"], "compaction_s_mean",
-                     "Compaction every minute under writes: mean compaction time per run", "seconds", "s3b-compaction"),
+        bar_chart(agg, outdir, ["S3a", "S3a-ref", "S3a-mglru-off"], "compaction_s",
+                  "One large compaction: time per run", "seconds", "s3a-compaction"),
+        compaction_rounds_chart(agg, outdir, ["S3b", "S3b-ref"],
+                                "Compaction every minute under writes: every compaction of every run", "s3b-compaction"),
         ratio_chart(agg, outdir, "S2", ".p99_ms", "Reads under the memory limit: p99 latency, treatment vs control", "s2-p99"),
         ratio_chart(agg, outdir, "S1", ".p99_ms", "Reads with plenty of memory: p99 latency, treatment vs control", "s1-p99"),
         readahead_chart(supp, outdir),
@@ -935,7 +1070,7 @@ def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
             "Random point reads, 500-key range reads and a full list of all keys, at 16, 64 and 256 clients, with no "
             "memory limit: etcd's whole database stays cached, so both builds are expected to be equal.")
     md.extend(s1_long_section(supp.get("s1_long"), result("S1-long")))
-    section("S2: reads under memory pressure", "S2",
+    section(S2_TITLE, "S2",
             lambda k: reads(k) or k in ("majflt_total", "read_mib_total"), ["s2-p99"],
             "The same reads as S1 under the memory limit, followed by 10 minutes of steady point and range reads. "
             "Under the limit, treatment keeps the data these reads touch in memory, while control keeps losing it and "
@@ -946,7 +1081,7 @@ def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
     md.extend(s2_tight_section(supp.get("s2_tight"), by_name.get("s2-tight-readahead"), result("S2-tight")))
     section("S3a: one large compaction under memory pressure", "S3a",
             lambda k: k in ("compaction_s", "compaction_majflt", "compaction_read_mib", "backend_commit_p99_ms"),
-            ["s3a-compaction", "s3a-faults"],
+            ["s3a-compaction"],
             "etcd starts on a database holding 1,050,000 old revisions, the memory limit is applied, and one "
             "`etcdctl compact` removes them. The time is taken from etcd's own \"finished scheduled compaction\" log line.",
             after="Treatment reads more bytes from disk than control, but in large readahead chunks instead of one "
@@ -970,7 +1105,8 @@ def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
             "goes through more compaction rounds: compare per-compaction times and latencies, not totals."
             + (f" Neither build reaches the 1,000 per second target even without a memory limit (about "
                f"{ref_rate:.0f} per second, see below); that is a limit of this setup and the same for both."
-               if ref_rate and ref_rate < 950 else ""))
+               if ref_rate and ref_rate < 950 else ""),
+            after=s3b_rounds_text(s3b_rounds(agg)))
     section("S3b without a memory limit", "S3b-ref",
             lambda k: k.startswith("compaction_s") or k in ("put-compact.rps", "put-compact.p999_ms"), [],
             "The same workload with no memory limit: both builds are equal.")
@@ -983,10 +1119,14 @@ def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
     md.extend(["## S4: etcd's rw-benchmark.sh", ""] + result("S4") + [
                "etcd's `tools/rw-heatmaps/rw-benchmark.sh`, unmodified: workload mixes of read:write ratios from 1:8 "
                "to 8:1, values of 256 B, 1 KiB and 4 KiB, and 32 to 256 clients, each starting from an empty database, "
-               "with plenty of memory. Values are treatment against control for the mean throughput of each mix.", ""])
-    if s4 and "s4-cells" in by_name:
+               "with plenty of memory. The script runs each mix 5 times per build and reports the mean throughput; "
+               "values are treatment against control for that mean.", "",
+               "The chart uses the layout of the comparison images from etcd's `tools/rw-heatmaps`. That tool itself "
+               "could not draw this sweep: it only plots value sizes in 2x steps, and this reduced sweep skips 512 B "
+               "and 2 KiB (`docs/METHODS.md`, item 4).", ""])
+    if s4 and "s4-heatmap" in by_name:
         n = s4["summary"]["cells.read_qps"]["ratio"]["n"]
-        md.extend(fig(by_name["s4-cells"]) + [
+        md.extend(fig(by_name["s4-heatmap"]) + [
                    f"| {n} workload mixes | Treatment vs control (median over mixes) | Range over mixes |", "|---|--:|--:|"])
         for f, name in (("read_qps", "Read throughput"), ("write_qps", "Write throughput")):
             r = s4["summary"][f"cells.{f}"]["ratio"]
@@ -1046,7 +1186,9 @@ def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
                "whether each build kept up with the target rate. `put` and `range` start the clock after the wait, so "
                "their latencies are shown.",
                "- **How S3b is judged.** S3b uses the mean compaction time per run plus major faults, not the median: "
-               "control's damage is a few stalled compactions that a median hides. This was decided after 2 of 5 "
+               + ("control's damage is one stalled compaction per run (the first after the memory limit is applied) "
+                  if (s3b_rounds(agg) or {}).get("first_only") else "control's damage is a few stalled compactions ")
+               + "that a median hides. This was decided after 2 of 5 "
                f"pairs, before the rest ran (`{REFS['log']}`). Median, mean and slowest are all in the table.",
                "- **Same-VM comparisons only.** Absolute numbers differ between VMs (control's S3a compaction took "
                "771 to 1,123 s on the three VMs in the check before the main runs), so every comparison is within "
@@ -1069,14 +1211,25 @@ def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
     t = (supp or {}).get("s2_tight") or {}
     ta, tb = (t.get("4096") or {}).get("metrics"), (t.get("128") or {}).get("metrics")
     rows = []
+    # The sweep maintainers asked for leads; it cannot create memory pressure, so the rows below cover that.
+    if s4c and s4c["summary"].get("cells.read_qps"):
+        rr, wr = s4c["summary"]["cells.read_qps"]["ratio"], s4c["summary"]["cells.write_qps"]["ratio"]
+        within = max(abs(x - 1) for x in (rr["min"], rr["max"], wr["min"], wr["max"]))
+        rows.append(("`rw-benchmark.sh` sweep", f"No change: across {rr['n']} read/write workload mixes, median "
+                     f"{pct(rr['median'])} for reads and {pct(wr['median'])} for writes, all within {within * 100:.1f}% "
+                     "(each mix starts from a small, fresh database, so no memory pressure)"))
+    else:
+        rows.append(("`rw-benchmark.sh` sweep", "pending"))
     pr = s1_point_range(agg, supp)
     if s1 and pr:
         rows.append(("Reads, plenty of memory", f"No change: point-read throughput and p99 latency within "
                      f"{pct(min(pr))} to {pct(max(pr))} of control"))
     if s2:
+        cl = [c for c in (16, 64, 256) if _med(s2["summary"], f"stm-c{c}.rps")]
+        rps = [_med(s2["summary"], f"stm-c{c}.rps") for c in cl]
         rows.append(("Reads under memory pressure", f"Faster without `MADV_RANDOM`: "
-                     f"{_med(s2['summary'], 'stm-c64.rps') or 0:.0f}x the point-read throughput at 64 clients; a full "
-                     f"list of all keys is {_times(_med(s2['summary'], 'list-paginate.avg_ms'))}"))
+                     f"{min(rps):.0f}x to {max(rps):.0f}x the point-read throughput ({cl[0]} to {cl[-1]} clients); a "
+                     f"full list of all keys is {_times(_med(s2['summary'], 'list-paginate.avg_ms'))}"))
     if s3a:
         cs = s3a["summary"]["compaction_s"]
         line = (f"{_times(cs['ratio']['median'])} without `MADV_RANDOM` for one large compaction "
@@ -1086,23 +1239,26 @@ def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
             line += (f"; with compaction every minute under writes, the slowest compaction drops from "
                      f"{fmt(mx['control']['median'], ' s')} to {fmt(mx['treatment']['median'], ' s')}")
         rows.append(("Compaction under memory pressure", line))
-    if s4c and s4c["summary"].get("cells.read_qps"):
-        rr, wr = s4c["summary"]["cells.read_qps"]["ratio"], s4c["summary"]["cells.write_qps"]["ratio"]
-        within = max(abs(x - 1) for x in (rr["min"], rr["max"], wr["min"], wr["max"]))
-        rows.append(("`rw-benchmark.sh` sweep", f"No change: across {rr['n']} read/write workload mixes, median "
-                     f"{pct(rr['median'])} for reads and {pct(wr['median'])} for writes, all within {within * 100:.1f}%"))
-    else:
-        rows.append(("`rw-benchmark.sh` sweep", "pending"))
     gc = ["Following up on the request to evaluate this with etcd's own benchmark tools. I compared etcd `main` "
           "with bbolt v1.5.0 as shipped (control) against the same build with the `madvise(MADV_RANDOM)` call "
           "removed (treatment), using `tools/benchmark` and `tools/rw-heatmaps/rw-benchmark.sh` on Linux 6.12 "
           "(RHEL 10). \"Memory pressure\" means etcd ran under a cgroup memory limit below the size of its 8.6 GB "
           "database.", "",
           "| | Result |", "|---|---|"] + [f"| {a} | {b} |" for a, b in rows] + [""]
+    if s4c and s4c["summary"].get("cells.read_qps"):
+        gc += ["<!-- upload charts/s4-heatmap.png here -->", "",
+               f"*`rw-benchmark.sh`, {s4c['summary']['cells.read_qps']['ratio']['n']} workload mixes: treatment vs "
+               "control, one square per mix (pale = no change, red = treatment lower, blue = treatment higher).*", ""]
     s2f = (s2 and s2["summary"].get("majflt_total")) or {}
-    faults = (f" This also answers the earlier question about faults outside compaction: under memory pressure with reads only (no "
-              f"compaction), major page faults per run drop from {fmt(s2f['control']['median'])} to "
-              f"{fmt(s2f['treatment']['median'])}." if s2f.get("control") else "")
+    # "Almost disappear" only while the data says so; otherwise give the numbers.
+    s2_link = f"[S2 in the report]({REPO_URL}#{gh_anchor(S2_TITLE)})"
+    faults = ""
+    if s2f.get("ratio"):
+        faults = (" This also answers the earlier question about faults outside compaction: under memory pressure "
+                  "with reads only (no compaction), major page faults "
+                  + ("almost disappear without `MADV_RANDOM`" if s2f["ratio"]["median"] < 0.01 else
+                     f"per run go from {fmt(s2f['control']['median'])} to {fmt(s2f['treatment']['median'])}")
+                  + f" ({s2_link}).")
     gc += ["**Proposal:** remove the call (revive #940). This meets the condition suggested earlier in this thread (no impact "
            "other than compaction): nothing outside compaction gets worse, apart from the readahead case below, so etcd "
            "would not need to treat compaction differently from other reads." + faults + " If an "
@@ -1114,7 +1270,12 @@ def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
                "can hurt: with `read_ahead_kb=4096` (RHEL's stock tuning), a full list of all keys was "
                f"{_times(_med(ta, 'list-paginate.avg_ms'))} in our tightest test (memory limit "
                f"{gib(next(iter((t.get('4096') or {}).get('caps') or []), None))}), because each fault pushed out pages "
-               f"still in use. With the kernel default of 128 KiB it was {_times(_med(tb, 'list-paginate.avg_ms'))}.", ""]
+               f"still in use. With the kernel default of 128 KiB it was {_times(_med(tb, 'list-paginate.avg_ms'))}"
+               + (". So in that case the knob is the disk's readahead setting, not `MADV_RANDOM`."
+                  if (_med(tb, "list-paginate.avg_ms") or 9) < 1 else "."), "",
+               "<!-- upload charts/s2-tight-readahead.png here -->", "",
+               f"*Memory limit below the working set ({gib(next(iter((t.get('4096') or {}).get('caps') or []), None))}): "
+               "treatment vs control at 4 MiB and 128 KiB readahead (left of 1x = treatment faster).*", ""]
     def _n_range(ns):
         ns = sorted({n for n in ns if n})
         return "n/a" if not ns else str(ns[0]) if len(ns) == 1 else f"{ns[0]} to {ns[-1]}"
@@ -1122,15 +1283,17 @@ def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
     side_n = _n_range([(scen(agg, s) or {}).get("n_pairs") for s in ("S3a-ref", "S3b-ref")]
                       + [(t.get(ra) or {}).get("n_pairs") for ra in ("4096", "128")])
     gc += ["Scope: Linux 6.4 and later only; nothing here speaks to older kernels.", "",
-           "<!-- attach charts/s3a-compaction.png and charts/s2-tight-readahead.png here -->", "",
-           f"Full report: {REPO_URL} · Visual version: {PAGES_URL} · How to reproduce: "
-           f"{REPO_URL}/blob/main/docs/REPRODUCE.md · Raw data: {RAW_URL}", "",
+           f"[Full report]({REPO_URL}) · [Visual version]({PAGES_URL}) · How to reproduce: "
+           f"[steps]({REPO_URL}/blob/main/docs/REPRODUCE.md) and [what each script does]"
+           f"({REPO_URL}/blob/main/scripts/README.md) · [Raw data]({RAW_URL})", "",
            "<details><summary>Setup</summary>", "",
            "Single-member etcd per VM, AWS m7i.4xlarge (dedicated tenancy), gp3 data volume (3000 IOPS, 125 MiB/s). Each "
            "scenario runs control and treatment back to back on the same VM, each time from a fresh copy of the same "
            f"database: {main_n} pairs per scenario, {side_n} for the runs without a memory limit and the readahead "
            "test. `rw-benchmark.sh` runs its sweep once per build and repeats each workload mix 5 times. Random point "
-           "reads use `benchmark stm` with one existing key per read.", "",
+           "reads use `benchmark stm` with one existing key per read. Treatment: "
+           f"[`{TREATMENT_SHA[:7]}`](https://github.com/hasbro17/bbolt/commit/{TREATMENT_SHA}) "
+           "(bbolt v1.5.0 with the call removed).", "",
            "</details>", ""]
     comment_md = "\n".join(gc)
 
@@ -1159,6 +1322,7 @@ def md_table_to_html(block):
 def inline(s):
     s = html.escape(s, quote=False)
     s = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", s)
+    s = re.sub(r"(?<![\w*])\*([^*\s][^*]*?)\*(?![\w*])", r"<em>\1</em>", s)
     s = re.sub(r"`(.+?)`", r"<code>\1</code>", s)
     s = re.sub(r"\[([^\]]+)\]\((https?://[^)\s]+)\)", r'<a href="\2">\1</a>', s)
     s = re.sub(r"&lt;(https?://[^&\s]+)&gt;", r'<a href="\1">\1</a>', s)

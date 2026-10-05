@@ -255,6 +255,7 @@ def run_metrics(rundir, scenario):
                 if rd is not None:
                     m["compaction_read_mib"] = rd * 512 / 2**20
         elif tooks:
+            m["_compactions_s"] = tooks  # every compaction in log order, for the S3b chart
             m["compaction_s_median"] = statistics.median(tooks)
             m["compaction_s_max"] = max(tooks)
             m["compaction_s_mean"] = statistics.mean(tooks)

@@ -54,8 +54,8 @@ release tarball.
    wait (clients / rate: 64 / 2,000 = 32 ms for both builds). Their throughput is kept.
    `put` and `range` start the clock after the limiter, so their latencies stand.
 6. **S3b is judged on the mean compaction time per run plus major faults**, not the
-   median: control's damage is a few stalled compactions (one of ~238 s per run) that a
-   median hides. Decided after 2 of 5 S3b pairs, before the other 3 and the reference ran.
+   median: control's damage is one stalled compaction per run (~238 s, the first after the
+   memory limit is applied) that a median hides. Decided after 2 of 5 S3b pairs, before the other 3 and the reference ran.
 7. **S1-long added**: S1's point-read steps are short (0.5, 1.2, 4.3 s), so S1 was
    repeated with 10x the requests per point-read step (about 4, 11, 42 s), 5 pairs.
 8. **S2 at a 25% limit added**: in the main S2 run the treatment's working set fits after
