@@ -1,6 +1,6 @@
 # bbolt MADV_RANDOM removal: etcd benchmark results
 
-**Visual version of this report (charts with explanations, collapsible tables): <https://hasbro17.github.io/bbolt-madv-random-benchmark/>**
+**Visual version of this report (charts with explanations, collapsible tables): <https://hasbro17.github.io/bbolt-madv-random-benchmark/>** (if GitHub Pages is down, use this backup link: <https://raw.githack.com/hasbro17/bbolt-madv-random-benchmark/main/index.html>)
 
 etcd stores its data in bbolt, which memory-maps the database file. bbolt calls `madvise(MADV_RANDOM)` on that mapping, which tells the kernel not to read ahead around page faults. Since Linux 6.4 (kernel commit `8788f678`, "mm: add vma_has_recency()"), the same flag also stops the kernel from counting accesses through the mapping as recent use, so etcd's cached database pages are among the first to be evicted under memory pressure. Compaction then reads them back from disk one 4 KiB page at a time and becomes much slower ([etcd-io/bbolt#939](https://github.com/etcd-io/bbolt/issues/939)).
 

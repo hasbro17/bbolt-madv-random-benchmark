@@ -964,6 +964,8 @@ def restructure(report_md):
 # same text, so what is reviewed locally is exactly what gets published.
 REPO_URL = "https://github.com/hasbro17/bbolt-madv-random-benchmark"
 PAGES_URL = "https://hasbro17.github.io/bbolt-madv-random-benchmark/"
+# Serves the same index.html straight from the repo (no build), for when GitHub Pages is down.
+BACKUP_URL = "https://raw.githack.com/hasbro17/bbolt-madv-random-benchmark/main/index.html"
 RAW_URL = REPO_URL + "/releases/tag/raw-data-2026-10-03"
 S2_TITLE = "S2: reads under memory pressure"
 TREATMENT_SHA = "decad5af77c7e1e6fc5def24b372c869e6ea685f"  # branch remove-madv-random-v1.5 on hasbro17/bbolt
@@ -1000,7 +1002,8 @@ def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
     # ---------------- REPORT.md
     lim = " / ".join(gib(c) for c in capped) or "n/a"
     md = [f"# bbolt MADV_RANDOM removal: etcd benchmark results{' (DRAFT)' if draft else ''}", "",
-          f"**Visual version of this report (charts with explanations, collapsible tables): <{PAGES_URL}>**", "",
+          f"**Visual version of this report (charts with explanations, collapsible tables): <{PAGES_URL}>** "
+          f"(if GitHub Pages is down, use this backup link: <{BACKUP_URL}>)", "",
           "etcd stores its data in bbolt, which memory-maps the database file. bbolt calls "
           "`madvise(MADV_RANDOM)` on that mapping, which tells the kernel not to read ahead around page faults. "
           "Since Linux 6.4 (kernel commit `8788f678`, \"mm: add vma_has_recency()\"), the same flag also stops the "
@@ -1294,7 +1297,8 @@ def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
     side_n = _n_range([(scen(agg, s) or {}).get("n_pairs") for s in ("S3a-ref", "S3b-ref")]
                       + [(t.get(ra) or {}).get("n_pairs") for ra in ("4096", "128")])
     gc += ["Scope: Linux 6.4 and later only; nothing here speaks to older kernels.", "",
-           f"[Full report]({REPO_URL}) · [Visual version]({PAGES_URL}) · How to reproduce: "
+           f"[Full report]({REPO_URL}) · [Visual version]({PAGES_URL}) ([backup link]({BACKUP_URL}) if GitHub Pages "
+           f"is down) · How to reproduce: "
            f"[steps]({REPO_URL}/blob/main/docs/REPRODUCE.md) and [what each script does]"
            f"({REPO_URL}/blob/main/scripts/README.md) · [Raw data]({RAW_URL})", "",
            "<details><summary>Setup</summary>", "",
