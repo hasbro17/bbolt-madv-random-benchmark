@@ -27,14 +27,14 @@ Each row is one test scenario and the question it answers; the scenarios are des
 
 | | Question | Answer | Key numbers |
 |---|---|---|---|
-| **S1** | With plenty of memory, do reads change? | No difference | Point-read throughput and p99 latency within -1.0% to +0.6% of control. The 500-key range reads vary more from pair to pair, for both builds, because they keep etcd's CPU saturated. |
+| **S1** | With plenty of memory, do reads change? | No difference | Point-read throughput and p99 latency within -1.1% to +0.6% of control in S1 and in 10x longer runs (S1-long). The 500-key range reads vary more from pair to pair, for both builds, because they keep etcd's CPU saturated. |
 | **S2** | Under memory pressure, are reads slower without `MADV_RANDOM`? | No: none of the 11 read-latency measures is slower than control beyond its noise band | Depending on the read type, treatment's latency is -97.5% to +1.4% against control (p99; time per list for the full list) |
 | **S3** | Under memory pressure, is compaction slow with `MADV_RANDOM` and fast without it? | Yes: 11.9x faster without it | One large compaction (S3a) takes 773 s with `MADV_RANDOM` and 65.1 s without (median of 10 pairs). With compaction every minute under writes (S3b), the mean compaction drops from 26.9 s to 17.9 s and the slowest from 238 s to 19.2 s. |
 | **S4** | Does etcd's own `rw-benchmark.sh` sweep change? | No difference | Across 60 workload mixes, median change against control is +0.3% for reads and +0.3% for writes; every mix within 4.5%. |
 
 ### In short
 
-- **With plenty of memory, reads do not change:** point-read throughput is within -1.1% to +0.6% of control, also with 10x longer runs (S1, S1-long).
+- **With plenty of memory, reads do not change:** point-read throughput and p99 latency are within -1.1% to +0.6% of control, also with 10x longer runs (S1, S1-long).
 - **Under memory pressure, reads get faster without `MADV_RANDOM`:** 41x the point-read throughput at 64 clients, and a full list of all keys is 10.1x faster (S2).
 - **Under memory pressure, compaction is 11.9x faster without `MADV_RANDOM`** (S3a), and 23.8x faster with the kernel's MGLRU switched off, so the problem is not specific to MGLRU.
 - **One exception, when memory is smaller than the data etcd keeps reading:** it depends on the disk's readahead setting. With the kernel default (128 KiB), a full list is still 5.3x faster without `MADV_RANDOM`; with RHEL's stock 4 MiB readahead it is 6.5x slower, because each page fault pulls in up to 4 MiB and pushes out pages that are still needed (S2 follow-up).
@@ -171,7 +171,7 @@ Control is not affected by this setting, because `MADV_RANDOM` turns readahead o
 
 4 MiB: 3 pairs. 128 KiB: 3 pairs. Same scenario and limit; only the readahead setting of the data disk differs. The two settings ran on two different VMs, so only the treatment / control ratios are compared, never the absolute numbers.
 
-In short: with a 4 MiB readahead, each fault pulls in so much extra data that it pushes out pages that are still needed, and large reads get slower. With the default 128 KiB, treatment is faster than control on every other read measure; the p99 latency of 500-key range reads (10-min pass, fixed rate) is within noise, while reading 1.7x as much from disk.
+In short: with a 4 MiB readahead, each fault pulls in so much extra data that it pushes out pages that are still needed, and large reads get slower. With the default 128 KiB, treatment is faster than control on every read measure except the p99 latency of 500-key range reads (10-min pass, fixed rate), which is within noise. It reads 1.7x as much from disk as control.
 
 ## S3a: one large compaction under memory pressure
 

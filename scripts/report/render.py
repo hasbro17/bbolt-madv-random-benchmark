@@ -29,7 +29,7 @@ C_CTRL, C_TRT, C_BAND = "#b85c38", "#2f6f9f", "#9aa5b1"
 # Thresholds are stated in the report so a reader can check them.
 EQUIV_MIN = 0.05        # S1/S4: equivalent if |median ratio - 1| <= max(5%, half the ratio range)
 H3_MAX_RATIO = 0.5      # S3: treatment at least 2x faster at compaction, every pair below 1
-# S3b (decided 2026-10-03 after 2 of 5 pairs, before the rest; infra/LOG.md): the
+# S3b (decided 2026-10-03 after 2 of 5 pairs, before the rest; docs/METHODS.md item 6): the
 # median per-compaction time hides control's stalls (most compactions equal, a few far
 # slower), so S3b is judged on the mean compaction time per run (as in the cluster-scale
 # results posted on #939) plus major faults: every pair's mean ratio below 1 and faults/s cut by >= 90%.
@@ -161,7 +161,17 @@ def latency_keys(ms):
     return out
 
 
-def verdicts(agg):
+def s1_point_range(agg, supp):
+    """Median pair ratios of point-read throughput and p99 latency in S1 and S1-long, so every
+    place that quotes the no-pressure point-read range quotes the same one."""
+    s1 = scen(agg, "S1")
+    sl = ((supp or {}).get("s1_long") or {}).get("metrics")
+    keys = [f"stm-c{c}.{m}" for c in (16, 64, 256) for m in ("rps", "p99_ms")]
+    vals = ([_med(s1["summary"], k) for k in keys] if s1 else []) + ([_med(sl, k) for k in keys] if sl else [])
+    return [v for v in vals if v]
+
+
+def verdicts(agg, supp=None):
     """One row per hypothesis. Wording is for a reader new to the issue: plain words, numbers
     relative to control, no internal metric names."""
     out = []
@@ -177,13 +187,14 @@ def verdicts(agg):
         rm = read_metrics(s1["summary"])
         ms = {**latency_keys(rm), **{k: v for k, v in rm.items() if k.endswith(".rps")}}
         off = [k for k, v in ms.items() if abs(v["ratio"]["median"] - 1) > band(v["ratio"])]
-        pr = [v["ratio"]["median"] for k, v in ms.items() if k.startswith("stm-")]
+        pr = s1_point_range(agg, supp)
+        longer = " in S1 and in 10x longer runs (S1-long)" if (supp or {}).get("s1_long") else ""
         out.append({"id": "S1", "q": q1, "scenario": sc["S1"], "pass": not off,
                     "answer": "No difference" if not off else
                               f"{len(off)} of {len(ms)} measures differ beyond their noise band",
                     "headline": (f"Point-read throughput and p99 latency within {pct(min(pr))} to {pct(max(pr))} "
-                                 "of control. The 500-key range reads vary more from pair to pair, for both builds, "
-                                 "because they keep etcd's CPU saturated.") if pr else "",
+                                 f"of control{longer}. The 500-key range reads vary more from pair to pair, for both "
+                                 "builds, because they keep etcd's CPU saturated.") if pr else "",
                     "outside": off})
     else:
         out.append({"id": "S1", "q": q1, "scenario": sc["S1"], "pass": None, "answer": "not run", "headline": ""})
@@ -555,14 +566,15 @@ def _ra128_summary(m):
                                                 (k.endswith(".rps") and _med(m, k) < 1))]
     noise = [k for k in worse if (m[k]["ratio"]["min"] <= 1 <= m[k]["ratio"]["max"])]
     text = "With the default 128 KiB, treatment is faster than control on "
-    text += ("every read measure here too" if not worse else
-             "every other read measure; the " + ", ".join(_phrase(k) for k in noise) + " is within noise"
+    text += ("every read measure here too." if not worse else
+             "every read measure except the " + ", ".join(_phrase(k) for k in noise)
+             + (", which is" if len(noise) == 1 else ", which are") + " within noise."
              if len(noise) == len(worse) else
-             f"{len(perf) - len(worse)} of {len(perf)} read measures")
+             f"{len(perf) - len(worse)} of {len(perf)} read measures.")
     rb = _med(m, "read_mib_total")
     if rb and rb > 1:
-        text += f", while reading {rb:.1f}x as much from disk"
-    return text + "."
+        text += f" It reads {rb:.1f}x as much from disk as control."
+    return text
 
 
 def s1_long_section(t, res=()):
@@ -645,13 +657,10 @@ def key_findings(agg, supp):
     out = ["### In short", ""]
     s3a, s2, s1 = scen(agg, "S3a"), scen(agg, "S2"), scen(agg, "S1")
     off = scen(agg, "S3a-mglru-off")
-    sl = (supp.get("s1_long") or {}).get("metrics")
-    if s1:
-        rps = [_med(s1["summary"], f"stm-c{c}.rps") for c in (16, 64, 256)]
-        rps += [_med(sl, f"stm-c{c}.rps") for c in (16, 64, 256)] if sl else []
-        rps = [r for r in rps if r]
-        out.append(f"- **With plenty of memory, reads do not change:** point-read throughput is within {pct(min(rps))} "
-                   f"to {pct(max(rps))} of control, also with 10x longer runs (S1, S1-long).")
+    pr = s1_point_range(agg, supp)
+    if s1 and pr:
+        out.append(f"- **With plenty of memory, reads do not change:** point-read throughput and p99 latency are within "
+                   f"{pct(min(pr))} to {pct(max(pr))} of control, also with 10x longer runs (S1, S1-long).")
     if s2:
         lt = _med(s2["summary"], "list-paginate.avg_ms")
         out.append(f"- **Under memory pressure, reads get faster without `MADV_RANDOM`:** "
@@ -825,7 +834,7 @@ REFS = {"agg": "data/aggregate.json", "log": "docs/METHODS.md",
 
 
 def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
-    vs = verdicts(agg)
+    vs = verdicts(agg, supp)
     charts = [c for c in (
         paired_chart(agg, outdir, ["S3a", "S3a-ref", "S3a-mglru-off"], "compaction_s",
                      "One large compaction: time per pair", "seconds", "s3a-compaction"),
@@ -1059,13 +1068,11 @@ def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
     s3b = scen(agg, "S3b")
     t = (supp or {}).get("s2_tight") or {}
     ta, tb = (t.get("4096") or {}).get("metrics"), (t.get("128") or {}).get("metrics")
-    sl = ((supp or {}).get("s1_long") or {}).get("metrics")
     rows = []
-    if s1:
-        rps = [r for r in [_med(s1["summary"], f"stm-c{c}.rps") for c in (16, 64, 256)]
-               + ([_med(sl, f"stm-c{c}.rps") for c in (16, 64, 256)] if sl else []) if r]
-        rows.append(("Reads, plenty of memory", f"No change: point-read throughput within {pct(min(rps))} to "
-                     f"{pct(max(rps))} of control"))
+    pr = s1_point_range(agg, supp)
+    if s1 and pr:
+        rows.append(("Reads, plenty of memory", f"No change: point-read throughput and p99 latency within "
+                     f"{pct(min(pr))} to {pct(max(pr))} of control"))
     if s2:
         rows.append(("Reads under memory pressure", f"Faster without `MADV_RANDOM`: "
                      f"{_med(s2['summary'], 'stm-c64.rps') or 0:.0f}x the point-read throughput at 64 clients; a full "
@@ -1092,8 +1099,13 @@ def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
           "(RHEL 10). \"Memory pressure\" means etcd ran under a cgroup memory limit below the size of its 8.6 GB "
           "database.", "",
           "| | Result |", "|---|---|"] + [f"| {a} | {b} |" for a, b in rows] + [""]
+    s2f = (s2 and s2["summary"].get("majflt_total")) or {}
+    faults = (f" This also answers the earlier question about faults outside compaction: under memory pressure with reads only (no "
+              f"compaction), major page faults per run drop from {fmt(s2f['control']['median'])} to "
+              f"{fmt(s2f['treatment']['median'])}." if s2f.get("control") else "")
     gc += ["**Proposal:** remove the call (revive #940). This meets the condition suggested earlier in this thread (no impact "
-           "other than compaction): nothing outside compaction gets worse, apart from the readahead case below. If an "
+           "other than compaction): nothing outside compaction gets worse, apart from the readahead case below, so etcd "
+           "would not need to treat compaction differently from other reads." + faults + " If an "
            "option is still preferred, I'm happy to add one, but it should default to not setting `MADV_RANDOM`; "
            "otherwise the compaction slowdown stays on every 6.4+ kernel.", ""]
     if ta and tb:
@@ -1103,13 +1115,22 @@ def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
                f"{_times(_med(ta, 'list-paginate.avg_ms'))} in our tightest test (memory limit "
                f"{gib(next(iter((t.get('4096') or {}).get('caps') or []), None))}), because each fault pushed out pages "
                f"still in use. With the kernel default of 128 KiB it was {_times(_med(tb, 'list-paginate.avg_ms'))}.", ""]
+    def _n_range(ns):
+        ns = sorted({n for n in ns if n})
+        return "n/a" if not ns else str(ns[0]) if len(ns) == 1 else f"{ns[0]} to {ns[-1]}"
+    main_n = _n_range((scen(agg, s) or {}).get("n_pairs") for s in ("S1", "S2", "S3a", "S3b"))
+    side_n = _n_range([(scen(agg, s) or {}).get("n_pairs") for s in ("S3a-ref", "S3b-ref")]
+                      + [(t.get(ra) or {}).get("n_pairs") for ra in ("4096", "128")])
     gc += ["Scope: Linux 6.4 and later only; nothing here speaks to older kernels.", "",
            "<!-- attach charts/s3a-compaction.png and charts/s2-tight-readahead.png here -->", "",
-           f"Full report: {REPO_URL} · Visual version: {PAGES_URL} · Scripts and data: {REPO_URL}/tree/main/scripts, {RAW_URL}", "",
+           f"Full report: {REPO_URL} · Visual version: {PAGES_URL} · How to reproduce: "
+           f"{REPO_URL}/blob/main/docs/REPRODUCE.md · Raw data: {RAW_URL}", "",
            "<details><summary>Setup</summary>", "",
            "Single-member etcd per VM, AWS m7i.4xlarge (dedicated tenancy), gp3 data volume (3000 IOPS, 125 MiB/s). Each "
-           "scenario runs control and treatment back to back on the same VM, 5 to 10 times, each time from a fresh "
-           "copy of the same database. Random point reads use `benchmark stm` with one existing key per read.", "",
+           "scenario runs control and treatment back to back on the same VM, each time from a fresh copy of the same "
+           f"database: {main_n} pairs per scenario, {side_n} for the runs without a memory limit and the readahead "
+           "test. `rw-benchmark.sh` runs its sweep once per build and repeats each workload mix 5 times. Random point "
+           "reads use `benchmark stm` with one existing key per read.", "",
            "</details>", ""]
     comment_md = "\n".join(gc)
 

@@ -7,7 +7,8 @@ For every scenario directory (S3a, S3a-ref, ...) and every completed pair (pair.
 both runs ok) it extracts per-run metrics from the raw files, computes the per-pair ratio
 treatment/control for every metric both runs have, and summarises each metric across pairs
 (control and treatment medians, median/min/max of the pair ratios). The per-pair ratio is
-the primary statistic (SPEC 4.2.2): it is measured within one host, back to back.
+the primary statistic (docs/METHODS.md, "Same VM only"): it is measured within one host,
+back to back.
 
 Sources per run: run.json, marks.csv, etcd.log (compaction lines), bench-*.txt (benchmark
 reports), samples.csv (1 Hz collector), metrics-{start,end}.txt (Prometheus), and for S4
