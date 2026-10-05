@@ -405,7 +405,7 @@ def readahead_chart(supp, outdir):
     ax.set_title(f"Memory limit below the working set ({cap}): treatment vs control", fontsize=11, loc="left")
     ax.legend(frameon=False, fontsize=8, loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=2)
     ax.spines[["top", "right"]].set_visible(False)
-    return save(fig, outdir, "s2-tight-readahead")
+    return {**save(fig, outdir, "s2-tight-readahead"), "log": True}
 
 
 # Diverging scale for the S4 heatmap: red (treatment lower) to blue (treatment higher)
@@ -601,6 +601,13 @@ def _ratio_cells(m, k):
 S2_TIGHT_ROWS = [(k, label(k)) for k in (
     "stm-c16.rps", "stm-c64.rps", "stm-c256.rps", "stm-c256.p99_ms", "range500-l-c64.p99_ms",
     "list-paginate.avg_ms", "mixed-range500.p99_ms", "read_mib_total", "majflt_total")]
+
+
+def chart_fold(c, title):
+    """A chart for the GitHub comment: collapsed, titled, with the report's "how to read" text above the
+    spot where the user drops the uploaded PNG. GitHub does not render markdown inside <summary>."""
+    return [f"<details><summary>{title}</summary>", "", caption(c), "",
+            f"<!-- upload {c['png']} here (keep the blank lines around it) -->", "", "</details>", ""]
 
 
 def fold(table):
@@ -1260,9 +1267,9 @@ def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
           "database.", "",
           "| | Result |", "|---|---|"] + [f"| {a} | {b} |" for a, b in rows] + [""]
     if s4c and s4c["summary"].get("cells.read_qps"):
-        gc += ["<!-- upload charts/s4-heatmap.png here -->", "",
-               f"*`rw-benchmark.sh`, {s4c['summary']['cells.read_qps']['ratio']['n']} workload mixes: treatment vs "
-               "control, one square per mix (pale = no change, red = treatment lower, blue = treatment higher).*", ""]
+        if "s4-heatmap" in by_name:
+            gc += chart_fold(by_name["s4-heatmap"], f"Chart: rw-benchmark.sh, "
+                             f"{s4c['summary']['cells.read_qps']['ratio']['n']} workload mixes, treatment vs control")
     s2f = (s2 and s2["summary"].get("majflt_total")) or {}
     # "Almost disappear" only while the data says so; otherwise give the numbers.
     s2_link = f"[S2 in the report]({REPO_URL}#{gh_anchor(S2_TITLE)})"
@@ -1286,10 +1293,11 @@ def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
                f"{gib(next(iter((t.get('4096') or {}).get('caps') or []), None))}), because each fault pushed out pages "
                f"still in use. With the kernel default of 128 KiB it was {_times(_med(tb, 'list-paginate.avg_ms'))}"
                + (". So in that case the knob is the disk's readahead setting, not `MADV_RANDOM`."
-                  if (_med(tb, "list-paginate.avg_ms") or 9) < 1 else "."), "",
-               "<!-- upload charts/s2-tight-readahead.png here -->", "",
-               f"*Memory limit below the working set ({gib(next(iter((t.get('4096') or {}).get('caps') or []), None))}): "
-               "treatment vs control at 4 MiB and 128 KiB readahead (left of 1x = treatment faster).*", ""]
+                  if (_med(tb, "list-paginate.avg_ms") or 9) < 1 else "."), ""]
+        if "s2-tight-readahead" in by_name:
+            gc += chart_fold(by_name["s2-tight-readahead"], "Chart: memory limit below the working set "
+                             f"({gib(next(iter((t.get('4096') or {}).get('caps') or []), None))}), 4 MiB vs 128 KiB "
+                             "readahead")
     def _n_range(ns):
         ns = sorted({n for n in ns if n})
         return "n/a" if not ns else str(ns[0]) if len(ns) == 1 else f"{ns[0]} to {ns[-1]}"

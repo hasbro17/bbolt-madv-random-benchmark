@@ -165,7 +165,7 @@ The same reads as S1 under the memory limit, followed by 10 minutes of steady po
 
 Control is not affected by this setting, because `MADV_RANDOM` turns readahead off. Values are treatment against control per pair: for throughput higher is better; for time, latency, disk reads and faults lower is better.
 
-*How to read the chart:* Each row is one measure under the tighter limit. The dots show treatment relative to control (median pair, line = all pairs), once with 4 MiB readahead (purple) and once with 128 KiB (blue). Left of 1x means treatment is faster.
+*How to read the chart:* Each row is one measure under the tighter limit. The dots show treatment relative to control (median pair, line = all pairs), once with 4 MiB readahead (purple) and once with 128 KiB (blue). Left of 1x means treatment is faster. The axis is logarithmic, so equal distances mean equal ratios (0.5x and 2x are the same distance from 1x).
 
 ![s2-tight-readahead](charts/s2-tight-readahead.png)
 
