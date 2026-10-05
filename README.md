@@ -1,5 +1,7 @@
 # bbolt MADV_RANDOM removal: etcd benchmark results
 
+**Visual version of this report (charts with explanations, collapsible tables): <https://hasbro17.github.io/bbolt-madv-random-benchmark/>**
+
 etcd stores its data in bbolt, which memory-maps the database file. bbolt calls `madvise(MADV_RANDOM)` on that mapping, which tells the kernel not to read ahead around page faults. Since Linux 6.4 (kernel commit `8788f678`, "mm: add vma_has_recency()"), the same flag also stops the kernel from counting accesses through the mapping as recent use, so etcd's cached database pages are among the first to be evicted under memory pressure. Compaction then reads them back from disk one 4 KiB page at a time and becomes much slower ([etcd-io/bbolt#939](https://github.com/etcd-io/bbolt/issues/939)).
 
 The question asked on the issue: **does removing the `MADV_RANDOM` call affect performance other than compaction?** This report answers it with etcd's own benchmark tools (`tools/benchmark` and `tools/rw-heatmaps/rw-benchmark.sh`).
@@ -353,6 +355,6 @@ The S3a compaction at three memory limits on one VM, one run per build at each l
 
 - Hosts: 5 identical VMs, each with kernel `6.12.0-211.53.1.el10_2.x86_64` and `read_ahead_kb=4096` on the data disk
 - Versions, binary checksums, dataset and memory limit: `docs/VERSIONS.md`, `docs/DATASET.md`, `docs/PRESSURE.md`.
-- Every failure, fix and rerun: `docs/METHODS.md`. Raw per-run data, including failed and superseded attempts, is in the release tarball.
+- Every failure, fix and rerun: `docs/METHODS.md`. Raw per-run data, including failed and superseded attempts, is in the [raw-data release](https://github.com/hasbro17/bbolt-madv-random-benchmark/releases/tag/raw-data-2026-10-03).
 - Reproduce: `docs/REPRODUCE.md` and `scripts/`; any Linux 6.4+ host with cgroup v2.
 

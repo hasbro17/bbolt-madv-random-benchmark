@@ -815,9 +815,12 @@ def restructure(report_md):
 
 # File references in the report, for the published repo layout. The working copy renders the
 # same text, so what is reviewed locally is exactly what gets published.
+REPO_URL = "https://github.com/hasbro17/bbolt-madv-random-benchmark"
+PAGES_URL = "https://hasbro17.github.io/bbolt-madv-random-benchmark/"
+RAW_URL = REPO_URL + "/releases/tag/raw-data-2026-10-03"
 REFS = {"agg": "data/aggregate.json", "log": "docs/METHODS.md",
         "inputs": "`docs/VERSIONS.md`, `docs/DATASET.md`, `docs/PRESSURE.md`",
-        "raw": "Raw per-run data, including failed and superseded attempts, is in the release tarball.",
+        "raw": f"Raw per-run data, including failed and superseded attempts, is in the [raw-data release]({RAW_URL}).",
         "repro": "`docs/REPRODUCE.md` and `scripts/`"}
 
 
@@ -843,6 +846,7 @@ def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
     # ---------------- REPORT.md
     lim = " / ".join(gib(c) for c in capped) or "n/a"
     md = [f"# bbolt MADV_RANDOM removal: etcd benchmark results{' (DRAFT)' if draft else ''}", "",
+          f"**Visual version of this report (charts with explanations, collapsible tables): <{PAGES_URL}>**", "",
           "etcd stores its data in bbolt, which memory-maps the database file. bbolt calls "
           "`madvise(MADV_RANDOM)` on that mapping, which tells the kernel not to read ahead around page faults. "
           "Since Linux 6.4 (kernel commit `8788f678`, \"mm: add vma_has_recency()\"), the same flag also stops the "
@@ -1101,7 +1105,7 @@ def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
                f"still in use. With the kernel default of 128 KiB it was {_times(_med(tb, 'list-paginate.avg_ms'))}.", ""]
     gc += ["Scope: Linux 6.4 and later only; nothing here speaks to older kernels.", "",
            "<!-- attach charts/s3a-compaction.png and charts/s2-tight-readahead.png here -->", "",
-           "Full report: {{REPORT_URL}} · Visual version: {{HTML_URL}} · Scripts and data: {{SCRIPTS_URL}}", "",
+           f"Full report: {REPO_URL} · Visual version: {PAGES_URL} · Scripts and data: {REPO_URL}/tree/main/scripts, {RAW_URL}", "",
            "<details><summary>Setup</summary>", "",
            "Single-member etcd per VM, AWS m7i.4xlarge (dedicated tenancy), gp3 data volume (3000 IOPS, 125 MiB/s). Each "
            "scenario runs control and treatment back to back on the same VM, 5 to 10 times, each time from a fresh "
@@ -1132,9 +1136,11 @@ def md_table_to_html(block):
 
 
 def inline(s):
-    s = html.escape(s)
+    s = html.escape(s, quote=False)
     s = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", s)
     s = re.sub(r"`(.+?)`", r"<code>\1</code>", s)
+    s = re.sub(r"\[([^\]]+)\]\((https?://[^)\s]+)\)", r'<a href="\2">\1</a>', s)
+    s = re.sub(r"&lt;(https?://[^&\s]+)&gt;", r'<a href="\1">\1</a>', s)
     return s
 
 
@@ -1145,12 +1151,16 @@ def render_html(vs, by_name, agg, report_md, when, draft):
         f'<div class="card {cls[v["pass"]]}"><div class="cid">{v["id"]} <span class="badge">{word[v["pass"]]}</span></div>'
         f'<div class="q">{inline(v["q"])}</div><div class="a">{inline(v["answer"])}</div>'
         f'<div class="h">{inline(v["headline"])}</div></div>' for v in vs)
-    # The scope line (before "## Answer") and the "In short" bullets (inside it) go under the cards.
-    scope = next((l for l in report_md.split("## Answer")[0].splitlines() if l.startswith("**Scope")), "")
+    # The intro (everything before the first section: background, question, short answer, scope)
+    # goes above the cards; the "In short" bullets go under them. The page itself is the visual
+    # version, so the markdown's link to it is left out.
+    head = report_md.split("\n## ", 1)[0]
+    intro = "".join((f'<p class="scope">{inline(l)}</p>' if l.startswith("**Scope") else f"<p>{inline(l)}</p>")
+                    for l in head.splitlines()
+                    if l.strip() and not l.startswith("# ") and not l.startswith("**Visual version"))
     ans = report_md.split("## Answer", 1)[1].split("\n## ", 1)[0] if "## Answer" in report_md else ""
     bullets = [l[2:] for l in ans.split("### In short", 1)[-1].splitlines() if l.startswith("- ")] if "### In short" in ans else []
-    findings = ((f'<p class="scope">{inline(scope)}</p>' if scope else "")
-                + (f'<h2>In short</h2><ul class="findings">{"".join(f"<li>{inline(b)}</li>" for b in bullets)}</ul>'
+    findings = ((f'<h2>In short</h2><ul class="findings">{"".join(f"<li>{inline(b)}</li>" for b in bullets)}</ul>'
                    if bullets else ""))
     # Sections: reuse the markdown sections, swap images for inline SVG and tables for HTML.
     parts = re.split(r"^## ", report_md, flags=re.M)[1:]
@@ -1210,7 +1220,8 @@ summary {{ cursor:pointer; color:var(--accent); }}
 </style></head>
 <body><main>
 <h1>bbolt MADV_RANDOM removal: etcd benchmark results{' (draft)' if draft else ''}</h1>
-<p class="sub">Generated {when}. Does removing <code>madvise(MADV_RANDOM)</code> affect etcd performance other than compaction? (etcd-io/bbolt#939)</p>
+<p class="sub">Generated {when}.</p>
+{intro}
 <div class="cards">{cards}</div>
 {findings}
 {''.join(secs)}
