@@ -1,0 +1,22 @@
+{
+  "binary_sha": "5faf34447c5f5de14877aaeef4d21601f61da555f8bc59fbf293afebbc5f2543",
+  "cap": 1073741824,
+  "cgroup": "",
+  "end_ts": 1790985296,
+  "etcd_pid": 40669,
+  "fault": "",
+  "golden": "history",
+  "hostname": "local-mac",
+  "kernel": "24.6.0",
+  "mode": "mac",
+  "reason": "",
+  "restore_s": 1,
+  "scenario": "S2",
+  "scenario_rev": "",
+  "smoke": 1,
+  "start_ts": 1790985229,
+  "status": "ok",
+  "tooling_rev": "5e39168ef42d",
+  "variant": "treatment",
+  "vm": "local"
+}

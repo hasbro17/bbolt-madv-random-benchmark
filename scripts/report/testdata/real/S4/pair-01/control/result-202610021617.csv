@@ -1,0 +1,4 @@
+type,ratio,conn_size,value_size,iter1,comment
+PARAM,,,,,"key_size=256,key_space_size=65536,backend_size=21474836480,range_limit=100,commit=64f26db45"
+DATA,1,32,256,798.5710:801.7563,
+DATA,1,64,256,1500.1582:1373.6023,

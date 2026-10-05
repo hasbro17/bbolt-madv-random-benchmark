@@ -1,0 +1,48 @@
+From decad5af77c7e1e6fc5def24b372c869e6ea685f Mon Sep 17 00:00:00 2001
+From: Haseeb Tariq <hasbro17@gmail.com>
+Date: Fri, 2 Oct 2026 15:56:39 -0700
+Subject: [PATCH] bolt_unix: Remove madvise(MADV_RANDOM) on the data mmap
+
+On Linux 6.4+ (kernel commit 8788f678, "mm: add vma_has_recency()"),
+MGLRU no longer treats page-table accesses in VM_RAND_READ mappings as
+recency. bbolt's MADV_RANDOM therefore lets the kernel evict etcd's hot
+pages easily, and paths that touch many pages (etcd compaction) fault
+them back in one page at a time. Dropping the hint restores the kernel
+default (MADV_NORMAL), same as the closed etcd-io/bbolt#940.
+
+See etcd-io/bbolt#939.
+
+Assisted-by: LLM
+---
+ bolt_unix.go | 8 --------
+ 1 file changed, 8 deletions(-)
+
+diff --git a/bolt_unix.go b/bolt_unix.go
+index f68e721..9775f2c 100644
+--- a/bolt_unix.go
++++ b/bolt_unix.go
+@@ -3,7 +3,6 @@
+ package bbolt
+ 
+ import (
+-	"fmt"
+ 	"syscall"
+ 	"time"
+ 	"unsafe"
+@@ -59,13 +58,6 @@ func mmap(db *DB, sz int) error {
+ 		return err
+ 	}
+ 
+-	// Advise the kernel that the mmap is accessed randomly.
+-	err = unix.Madvise(b, syscall.MADV_RANDOM)
+-	if err != nil && err != syscall.ENOSYS {
+-		// Ignore not implemented error in kernel because it still works.
+-		return fmt.Errorf("madvise: %s", err)
+-	}
+-
+ 	// Save the original byte slice and convert to a byte array pointer.
+ 	db.dataref = b
+ 	db.data = (*[common.MaxMapSize]byte)(unsafe.Pointer(&b[0]))
+-- 
+2.50.1 (Apple Git-155)
+

@@ -1,0 +1,102 @@
+bench with linearizable range
+2026/10/02 16:55:28 INFO: [core] original dial target is: "etcd-endpoints://0x2dcc539a0800/127.0.0.1:23379"
+2026/10/02 16:55:28 INFO: [core] [Channel #2] Channel created for target "etcd-endpoints://0x2dcc539a0800/127.0.0.1:23379"
+2026/10/02 16:55:28 INFO: [core] [Channel #2] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x2dcc539a0800", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:55:28 INFO: [core] [Channel #2] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:55:28 INFO: [core] [Channel #1] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:28 INFO: [core] [Channel #2] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:28 INFO: [core] [Channel #1] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:28 INFO: [core] [Channel #1] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:28 INFO: [core] [Channel #2] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:28 INFO: [core] [Channel #2] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:28 INFO: [roundrobin] [0x2dcc5392ddd0] Created
+2026/10/02 16:55:28 INFO: [core] [Channel #1 SubChannel #3] Subchannel created
+2026/10/02 16:55:28 INFO: [roundrobin] [0x2dcc53a21380] Created
+2026/10/02 16:55:28 INFO: [core] [Channel #1 SubChannel #3] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:28 INFO: [core] [Channel #2 SubChannel #4] Subchannel created
+2026/10/02 16:55:28 INFO: [core] [Channel #2] Channel exiting idle mode
+2026/10/02 16:55:28 INFO: [core] [Channel #1 SubChannel #3] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:28 INFO: [core] [Channel #2 SubChannel #4] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:28 INFO: [core] [Channel #2 SubChannel #4] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:28 INFO: [core] [Channel #1] Channel exiting idle mode
+2026/10/02 16:55:28 INFO: [core] [Channel #2 SubChannel #4] Subchannel Connectivity change to READY
+2026/10/02 16:55:28 INFO: [core] [Channel #2] Channel Connectivity change to READY
+2026/10/02 16:55:28 INFO: [core] [Channel #1 SubChannel #3] Subchannel Connectivity change to READY
+2026/10/02 16:55:28 INFO: [core] [Channel #1] Channel Connectivity change to READY
+50 / 50 [----------------------------------------------------------------------------] 100.00% ? p/s
+Summary:
+  Total:	0.0662 secs.
+  Slowest:	0.0111 secs.
+  Fastest:	0.0030 secs.
+  Average:	0.0051 secs.
+  Stddev:	0.0020 secs.
+  Requests/sec:	754.8732
+
+Response time histogram:
+  0.0030 [1]	|∎∎
+  0.0038 [10]	|∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎
+  0.0046 [16]	|∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎
+  0.0054 [8]	|∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎
+  0.0062 [7]	|∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎
+  0.0070 [2]	|∎∎∎∎∎
+  0.0079 [0]	|
+  0.0087 [0]	|
+  0.0095 [1]	|∎∎
+  0.0103 [3]	|∎∎∎∎∎∎∎
+  0.0111 [2]	|∎∎∎∎∎
+
+Latency distribution:
+  10% in 0.0032 secs.
+  25% in 0.0039 secs.
+  50% in 0.0045 secs.
+  75% in 0.0058 secs.
+  90% in 0.0096 secs.
+  95% in 0.0108 secs.

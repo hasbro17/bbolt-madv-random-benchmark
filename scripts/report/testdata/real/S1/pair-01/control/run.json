@@ -1,0 +1,22 @@
+{
+  "binary_sha": "1718a1e04a8c6b96df9f764e7072f96404bff0e0ac347e514aa621bc34737d74",
+  "cap": Infinity,
+  "cgroup": "",
+  "end_ts": 1790985303,
+  "etcd_pid": 48596,
+  "fault": "",
+  "golden": "history",
+  "hostname": "local-mac",
+  "kernel": "24.6.0",
+  "mode": "mac",
+  "reason": "",
+  "restore_s": 0,
+  "scenario": "S1",
+  "scenario_rev": "",
+  "smoke": 1,
+  "start_ts": 1790985296,
+  "status": "ok",
+  "tooling_rev": "5e39168ef42d",
+  "variant": "control",
+  "vm": "local"
+}

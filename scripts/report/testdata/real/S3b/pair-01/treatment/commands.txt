@@ -1,0 +1,2 @@
+benchmark put --key-size=16 --val-size=4096 --key-space-size=10000 --rate=1000 --total=120000 --compact-interval=60s --compact-index-delta=30000 --clients=16 --conns=4
+benchmark stm --keys=10000 --keys-per-txn=1 --txn-wr-percent=0 --isolation=c --val-size=8 --rate=500 --total=60000 --clients=16 --conns=4

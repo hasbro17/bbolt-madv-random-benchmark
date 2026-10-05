@@ -1,0 +1,11 @@
+benchmark range  --prefix --paginate --total=1 --clients=1 --conns=1
+benchmark stm --keys=10000 --keys-per-txn=1 --txn-wr-percent=0 --isolation=c --val-size=8 --total=1000 --clients=16 --conns=4
+benchmark range  --prefix --limit=500 --consistency=l --total=50 --clients=16 --conns=4
+benchmark range  --prefix --limit=500 --consistency=s --total=50 --clients=16 --conns=4
+benchmark stm --keys=10000 --keys-per-txn=1 --txn-wr-percent=0 --isolation=c --val-size=8 --total=4000 --clients=64 --conns=16
+benchmark range  --prefix --limit=500 --consistency=l --total=200 --clients=64 --conns=16
+benchmark range  --prefix --limit=500 --consistency=s --total=200 --clients=64 --conns=16
+benchmark stm --keys=10000 --keys-per-txn=1 --txn-wr-percent=0 --isolation=c --val-size=8 --total=16000 --clients=256 --conns=64
+benchmark range  --prefix --limit=500 --consistency=l --total=800 --clients=256 --conns=64
+benchmark range  --prefix --limit=500 --consistency=s --total=800 --clients=256 --conns=64
+benchmark range  --prefix --paginate --total=1 --clients=1 --conns=1

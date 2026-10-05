@@ -1,0 +1,10 @@
+50.000% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,1,32,256].took 1 seconds
+kill etcd server instance
+100.000% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,1,64,256].took 0 seconds
+kill etcd server instance

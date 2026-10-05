@@ -1,0 +1,1 @@
+RATIO_LIST="1" VALUE_SIZE_POWER_RANGE="8 8" CONN_CLI_COUNT_POWER_RANGE="5 6" REPEAT_COUNT=1 RUN_COUNT=2000 tools/rw-heatmaps/rw-benchmark.sh -w /bench/local/mac-data/rwbench

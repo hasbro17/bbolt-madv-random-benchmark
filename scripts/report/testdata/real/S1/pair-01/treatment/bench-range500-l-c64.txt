@@ -1,0 +1,635 @@
+bench with linearizable range
+2026/10/02 16:55:06 INFO: [core] original dial target is: "etcd-endpoints://0x3fb0931e800/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #2] Channel created for target "etcd-endpoints://0x3fb0931e800/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #2] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x3fb0931e800", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:55:06 INFO: [core] [Channel #2] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] original dial target is: "etcd-endpoints://0x3fb0927c000/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #3] Channel created for target "etcd-endpoints://0x3fb0927c000/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #3] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x3fb0927c000", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:55:06 INFO: [core] [Channel #3] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] original dial target is: "etcd-endpoints://0x3fb0931ea00/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #4] Channel created for target "etcd-endpoints://0x3fb0931ea00/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #4] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x3fb0931ea00", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:55:06 INFO: [core] [Channel #4] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] original dial target is: "etcd-endpoints://0x3fb0931ec00/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #5] Channel created for target "etcd-endpoints://0x3fb0931ec00/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #5] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x3fb0931ec00", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:55:06 INFO: [core] [Channel #5] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] original dial target is: "etcd-endpoints://0x3fb0931f000/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #6] Channel created for target "etcd-endpoints://0x3fb0931f000/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #6] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x3fb0931f000", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:55:06 INFO: [core] [Channel #6] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] original dial target is: "etcd-endpoints://0x3fb0931f200/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #7] Channel created for target "etcd-endpoints://0x3fb0931f200/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #7] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x3fb0931f200", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:55:06 INFO: [core] [Channel #7] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] original dial target is: "etcd-endpoints://0x3fb0931f400/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #8] Channel created for target "etcd-endpoints://0x3fb0931f400/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #8] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x3fb0931f400", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:55:06 INFO: [core] [Channel #8] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] original dial target is: "etcd-endpoints://0x3fb0931f600/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #9] Channel created for target "etcd-endpoints://0x3fb0931f600/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #9] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x3fb0931f600", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:55:06 INFO: [core] [Channel #9] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] original dial target is: "etcd-endpoints://0x3fb0931f800/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #10] Channel created for target "etcd-endpoints://0x3fb0931f800/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #10] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x3fb0931f800", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:55:06 INFO: [core] [Channel #10] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] original dial target is: "etcd-endpoints://0x3fb0931fa00/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #11] Channel created for target "etcd-endpoints://0x3fb0931fa00/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #11] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x3fb0931fa00", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:55:06 INFO: [core] [Channel #11] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] original dial target is: "etcd-endpoints://0x3fb0931fc00/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #12] Channel created for target "etcd-endpoints://0x3fb0931fc00/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #12] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x3fb0931fc00", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:55:06 INFO: [core] [Channel #12] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] original dial target is: "etcd-endpoints://0x3fb0927c200/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #13] Channel created for target "etcd-endpoints://0x3fb0927c200/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #13] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x3fb0927c200", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:55:06 INFO: [core] [Channel #13] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] original dial target is: "etcd-endpoints://0x3fb0927c400/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #14] Channel created for target "etcd-endpoints://0x3fb0927c400/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #14] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x3fb0927c400", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:55:06 INFO: [core] [Channel #14] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] original dial target is: "etcd-endpoints://0x3fb0927c600/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #15] Channel created for target "etcd-endpoints://0x3fb0927c600/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #15] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x3fb0927c600", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:55:06 INFO: [core] [Channel #15] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] original dial target is: "etcd-endpoints://0x3fb0927c800/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #16] Channel created for target "etcd-endpoints://0x3fb0927c800/127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #16] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x3fb0927c800", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:55:06 INFO: [core] [Channel #16] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:55:06 INFO: [core] [Channel #10] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #12] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #7] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #3] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #1] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #4] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #13] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #11] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #5] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #3] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:06 INFO: [core] [Channel #1] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:06 INFO: [core] [Channel #10] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:06 INFO: [core] [Channel #1] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:06 INFO: [core] [Channel #10] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:06 INFO: [roundrobin] [0x3fb09236c90] Created
+2026/10/02 16:55:06 INFO: [core] [Channel #13] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:06 INFO: [core] [Channel #13] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:06 INFO: [core] [Channel #7] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:06 INFO: [roundrobin] [0x3fb09cce120] Created
+2026/10/02 16:55:06 INFO: [core] [Channel #3] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:06 INFO: [core] [Channel #1 SubChannel #18] Subchannel created
+2026/10/02 16:55:06 INFO: [core] [Channel #5] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:06 INFO: [core] [Channel #16] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #15] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [roundrobin] [0x3fb0a01c060] Created
+2026/10/02 16:55:06 INFO: [core] [Channel #3 SubChannel #19] Subchannel created
+2026/10/02 16:55:06 INFO: [core] [Channel #10 SubChannel #17] Subchannel created
+2026/10/02 16:55:06 INFO: [core] [Channel #10] Channel exiting idle mode
+2026/10/02 16:55:06 INFO: [core] [Channel #2] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #1 SubChannel #18] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #1 SubChannel #18] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:06 INFO: [core] [Channel #3] Channel exiting idle mode
+2026/10/02 16:55:06 INFO: [core] [Channel #10 SubChannel #17] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #10 SubChannel #17] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:06 INFO: [core] [Channel #6] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #2] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:06 INFO: [core] [Channel #6] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:06 INFO: [core] [Channel #4] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:06 INFO: [core] [Channel #2] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:06 INFO: [roundrobin] [0x3fb094ee930] Created
+2026/10/02 16:55:06 INFO: [core] [Channel #13 SubChannel #20] Subchannel created
+2026/10/02 16:55:06 INFO: [core] [Channel #13] Channel exiting idle mode
+2026/10/02 16:55:06 INFO: [core] [Channel #4] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:06 INFO: [core] [Channel #1] Channel exiting idle mode
+2026/10/02 16:55:06 INFO: [roundrobin] [0x3fb09d1c7e0] Created
+2026/10/02 16:55:06 INFO: [core] [Channel #4 SubChannel #21] Subchannel created
+2026/10/02 16:55:06 INFO: [core] [Channel #16] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:06 INFO: [core] [Channel #4] Channel exiting idle mode
+2026/10/02 16:55:06 INFO: [core] [Channel #16] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:06 INFO: [core] [Channel #15] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:06 INFO: [core] [Channel #15] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:06 INFO: [roundrobin] [0x3fb09d1c960] Created
+2026/10/02 16:55:06 INFO: [core] [Channel #15 SubChannel #24] Subchannel created
+2026/10/02 16:55:06 INFO: [core] [Channel #15] Channel exiting idle mode
+2026/10/02 16:55:06 INFO: [core] [Channel #8] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #15 SubChannel #24] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [roundrobin] [0x3fb09236ed0] Created
+2026/10/02 16:55:06 INFO: [core] [Channel #16 SubChannel #25] Subchannel created
+2026/10/02 16:55:06 INFO: [core] [Channel #16] Channel exiting idle mode
+2026/10/02 16:55:06 INFO: [core] [Channel #10 SubChannel #17] Subchannel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #16 SubChannel #25] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #16 SubChannel #25] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:06 INFO: [core] [Channel #12] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:06 INFO: [core] [Channel #12] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:06 INFO: [roundrobin] [0x3fb09cce780] Created
+2026/10/02 16:55:06 INFO: [core] [Channel #6] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:06 INFO: [core] [Channel #12 SubChannel #26] Subchannel created
+2026/10/02 16:55:06 INFO: [roundrobin] [0x3fb094eed50] Created
+2026/10/02 16:55:06 INFO: [core] [Channel #12 SubChannel #26] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [roundrobin] [0x3fb09d1cc30] Created
+2026/10/02 16:55:06 INFO: [core] [Channel #10] Channel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #6 SubChannel #28] Subchannel created
+2026/10/02 16:55:06 INFO: [core] [Channel #12 SubChannel #26] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:06 INFO: [core] [Channel #6] Channel exiting idle mode
+2026/10/02 16:55:06 INFO: [core] [Channel #5] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:06 INFO: [core] [Channel #14] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #2 SubChannel #27] Subchannel created
+2026/10/02 16:55:06 INFO: [core] [Channel #7] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:06 INFO: [core] [Channel #2] Channel exiting idle mode
+2026/10/02 16:55:06 INFO: [core] [Channel #14] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:06 INFO: [core] [Channel #14] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:06 INFO: [core] [Channel #16 SubChannel #25] Subchannel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #2 SubChannel #27] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #16] Channel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #4 SubChannel #21] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #4 SubChannel #21] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:06 INFO: [roundrobin] [0x3fb09237140] Created
+2026/10/02 16:55:06 INFO: [core] [Channel #14 SubChannel #31] Subchannel created
+2026/10/02 16:55:06 INFO: [core] [Channel #2 SubChannel #27] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:06 INFO: [core] [Channel #12 SubChannel #26] Subchannel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #12] Channel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #14] Channel exiting idle mode
+2026/10/02 16:55:06 INFO: [core] [Channel #11] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:06 INFO: [core] [Channel #1 SubChannel #18] Subchannel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #9] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #11] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:06 INFO: [roundrobin] [0x3fb09e00cf0] Created
+2026/10/02 16:55:06 INFO: [core] [Channel #12] Channel exiting idle mode
+2026/10/02 16:55:06 INFO: [core] [Channel #11 SubChannel #34] Subchannel created
+2026/10/02 16:55:06 INFO: [core] [Channel #11] Channel exiting idle mode
+2026/10/02 16:55:06 INFO: [core] [Channel #3 SubChannel #19] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #3 SubChannel #19] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:06 INFO: [core] [Channel #11 SubChannel #34] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #11 SubChannel #34] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:06 INFO: [core] [Channel #4 SubChannel #21] Subchannel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #13 SubChannel #20] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #13 SubChannel #20] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:06 INFO: [core] [Channel #6 SubChannel #28] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #6 SubChannel #28] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:06 INFO: [core] [Channel #4] Channel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [roundrobin] [0x3fb09d1ce70] Created
+2026/10/02 16:55:06 INFO: [core] [Channel #5 SubChannel #35] Subchannel created
+2026/10/02 16:55:06 INFO: [core] [Channel #5] Channel exiting idle mode
+2026/10/02 16:55:06 INFO: [roundrobin] [0x3fb0a080060] Created
+2026/10/02 16:55:06 INFO: [core] [Channel #7 SubChannel #36] Subchannel created
+2026/10/02 16:55:06 INFO: [core] [Channel #7] Channel exiting idle mode
+2026/10/02 16:55:06 INFO: [core] [Channel #5 SubChannel #35] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #5 SubChannel #35] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:06 INFO: [core] [Channel #15 SubChannel #24] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:06 INFO: [core] [Channel #14 SubChannel #31] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #14 SubChannel #31] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:06 INFO: [core] [Channel #2 SubChannel #27] Subchannel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #1] Channel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #8] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:06 INFO: [core] [Channel #7 SubChannel #36] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #8] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:06 INFO: [core] [Channel #7 SubChannel #36] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:06 INFO: [core] [Channel #3 SubChannel #19] Subchannel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #3] Channel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #2] Channel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #13 SubChannel #20] Subchannel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #13] Channel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [roundrobin] [0x3fb09237680] Created
+2026/10/02 16:55:06 INFO: [core] [Channel #8 SubChannel #44] Subchannel created
+2026/10/02 16:55:06 INFO: [core] [Channel #9] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:06 INFO: [core] [Channel #6 SubChannel #28] Subchannel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #15 SubChannel #24] Subchannel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #15] Channel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #6] Channel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #9] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:06 INFO: [roundrobin] [0x3fb09d1de00] Created
+2026/10/02 16:55:06 INFO: [core] [Channel #11 SubChannel #34] Subchannel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #8] Channel exiting idle mode
+2026/10/02 16:55:06 INFO: [core] [Channel #8 SubChannel #44] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #9 SubChannel #46] Subchannel created
+2026/10/02 16:55:06 INFO: [core] [Channel #9] Channel exiting idle mode
+2026/10/02 16:55:06 INFO: [core] [Channel #9 SubChannel #46] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:06 INFO: [core] [Channel #9 SubChannel #46] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:06 INFO: [core] [Channel #8 SubChannel #44] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:06 INFO: [core] [Channel #11] Channel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #14 SubChannel #31] Subchannel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #14] Channel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #7 SubChannel #36] Subchannel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #5 SubChannel #35] Subchannel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #5] Channel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #7] Channel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #8 SubChannel #44] Subchannel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #8] Channel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #9 SubChannel #46] Subchannel Connectivity change to READY
+2026/10/02 16:55:06 INFO: [core] [Channel #9] Channel Connectivity change to READY
+200 / 200 [--------------------------------------------------------------------------] 100.00% ? p/s
+Summary:
+  Total:	0.1782 secs.
+  Slowest:	0.0846 secs.
+  Fastest:	0.0154 secs.
+  Average:	0.0522 secs.
+  Stddev:	0.0130 secs.
+  Requests/sec:	1122.4263
+
+Response time histogram:
+  0.0154 [1]	|∎
+  0.0223 [1]	|∎
+  0.0292 [5]	|∎∎∎∎∎
+  0.0361 [13]	|∎∎∎∎∎∎∎∎∎∎∎∎∎∎
+  0.0431 [36]	|∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎
+  0.0500 [35]	|∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎
+  0.0569 [37]	|∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎
+  0.0638 [31]	|∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎
+  0.0707 [25]	|∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎
+  0.0776 [11]	|∎∎∎∎∎∎∎∎∎∎∎
+  0.0846 [5]	|∎∎∎∎∎
+
+Latency distribution:
+  10% in 0.0363 secs.
+  25% in 0.0428 secs.
+  50% in 0.0515 secs.
+  75% in 0.0619 secs.
+  90% in 0.0693 secs.
+  95% in 0.0738 secs.
+  99% in 0.0830 secs.

@@ -1,0 +1,19 @@
+{
+  "binary_sha": "1718a1e04a8c6b96df9f764e7072f96404bff0e0ac347e514aa621bc34737d74",
+  "cap": Infinity,
+  "end_ts": 1790984208,
+  "fault": "",
+  "golden": "none",
+  "hostname": "local-mac",
+  "kernel": "24.6.0",
+  "mode": "mac",
+  "reason": "",
+  "scenario": "S4",
+  "scenario_rev": "",
+  "smoke": 1,
+  "start_ts": 1790983060,
+  "status": "ok",
+  "tooling_rev": "4ecd4534fc8b",
+  "variant": "control",
+  "vm": "local"
+}

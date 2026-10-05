@@ -1,0 +1,635 @@
+2026/10/02 16:53:55 INFO: [core] original dial target is: "etcd-endpoints://0x498f1ab12a00/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #2] Channel created for target "etcd-endpoints://0x498f1ab12a00/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #2] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x498f1ab12a00", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:53:55 INFO: [core] [Channel #2] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] original dial target is: "etcd-endpoints://0x498f1ab12c00/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #3] Channel created for target "etcd-endpoints://0x498f1ab12c00/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #3] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x498f1ab12c00", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:53:55 INFO: [core] [Channel #3] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] original dial target is: "etcd-endpoints://0x498f1ab12e00/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #4] Channel created for target "etcd-endpoints://0x498f1ab12e00/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #4] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x498f1ab12e00", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:53:55 INFO: [core] [Channel #4] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] original dial target is: "etcd-endpoints://0x498f1ab13000/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #5] Channel created for target "etcd-endpoints://0x498f1ab13000/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #5] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x498f1ab13000", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:53:55 INFO: [core] [Channel #5] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] original dial target is: "etcd-endpoints://0x498f1ab13400/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #6] Channel created for target "etcd-endpoints://0x498f1ab13400/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #6] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x498f1ab13400", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:53:55 INFO: [core] [Channel #6] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] original dial target is: "etcd-endpoints://0x498f1ab13600/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #7] Channel created for target "etcd-endpoints://0x498f1ab13600/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #7] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x498f1ab13600", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:53:55 INFO: [core] [Channel #7] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] original dial target is: "etcd-endpoints://0x498f1a9ce000/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #8] Channel created for target "etcd-endpoints://0x498f1a9ce000/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #8] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x498f1a9ce000", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:53:55 INFO: [core] [Channel #8] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] original dial target is: "etcd-endpoints://0x498f1ab13800/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #9] Channel created for target "etcd-endpoints://0x498f1ab13800/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #9] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x498f1ab13800", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:53:55 INFO: [core] [Channel #9] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] original dial target is: "etcd-endpoints://0x498f1ab13a00/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #10] Channel created for target "etcd-endpoints://0x498f1ab13a00/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #10] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x498f1ab13a00", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:53:55 INFO: [core] [Channel #10] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] original dial target is: "etcd-endpoints://0x498f1ab13c00/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #11] Channel created for target "etcd-endpoints://0x498f1ab13c00/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #11] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x498f1ab13c00", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:53:55 INFO: [core] [Channel #11] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] original dial target is: "etcd-endpoints://0x498f1a9ce200/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #12] Channel created for target "etcd-endpoints://0x498f1a9ce200/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #12] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x498f1a9ce200", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:53:55 INFO: [core] [Channel #12] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] original dial target is: "etcd-endpoints://0x498f1a9ce400/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #13] Channel created for target "etcd-endpoints://0x498f1a9ce400/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #13] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x498f1a9ce400", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:53:55 INFO: [core] [Channel #13] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] original dial target is: "etcd-endpoints://0x498f1a9ce600/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #14] Channel created for target "etcd-endpoints://0x498f1a9ce600/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #14] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x498f1a9ce600", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:53:55 INFO: [core] [Channel #14] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] original dial target is: "etcd-endpoints://0x498f1a9ce800/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #15] Channel created for target "etcd-endpoints://0x498f1a9ce800/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #15] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x498f1a9ce800", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:53:55 INFO: [core] [Channel #15] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] original dial target is: "etcd-endpoints://0x498f1a9cea00/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #16] Channel created for target "etcd-endpoints://0x498f1a9cea00/127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #16] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x498f1a9cea00", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:53:55 INFO: [core] [Channel #16] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:53:55 INFO: [core] [Channel #15] Channel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #15] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:53:55 INFO: [core] [Channel #15] Channel switches to new LB policy "round_robin"
+2026/10/02 16:53:55 INFO: [roundrobin] [0x498f1af9e270] Created
+2026/10/02 16:53:55 INFO: [core] [Channel #15 SubChannel #17] Subchannel created
+2026/10/02 16:53:55 INFO: [core] [Channel #13] Channel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #15 SubChannel #17] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #15 SubChannel #17] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:53:55 INFO: [core] [Channel #15] Channel exiting idle mode
+2026/10/02 16:53:55 INFO: [core] [Channel #13] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:53:55 INFO: [core] [Channel #13] Channel switches to new LB policy "round_robin"
+2026/10/02 16:53:55 INFO: [roundrobin] [0x498f1ad127b0] Created
+2026/10/02 16:53:55 INFO: [core] [Channel #13 SubChannel #18] Subchannel created
+2026/10/02 16:53:55 INFO: [core] [Channel #13] Channel exiting idle mode
+2026/10/02 16:53:55 INFO: [core] [Channel #13 SubChannel #18] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #1] Channel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #13 SubChannel #18] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:53:55 INFO: [core] [Channel #1] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:53:55 INFO: [core] [Channel #1] Channel switches to new LB policy "round_robin"
+2026/10/02 16:53:55 INFO: [roundrobin] [0x498f1ad12b10] Created
+2026/10/02 16:53:55 INFO: [core] [Channel #1 SubChannel #19] Subchannel created
+2026/10/02 16:53:55 INFO: [core] [Channel #1] Channel exiting idle mode
+2026/10/02 16:53:55 INFO: [core] [Channel #1 SubChannel #19] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #1 SubChannel #19] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:53:55 INFO: [core] [Channel #15 SubChannel #17] Subchannel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #15] Channel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #13 SubChannel #18] Subchannel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #13] Channel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #1 SubChannel #19] Subchannel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #1] Channel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #2] Channel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #2] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:53:55 INFO: [core] [Channel #2] Channel switches to new LB policy "round_robin"
+2026/10/02 16:53:55 INFO: [roundrobin] [0x498f1af9eb40] Created
+2026/10/02 16:53:55 INFO: [core] [Channel #2 SubChannel #23] Subchannel created
+2026/10/02 16:53:55 INFO: [core] [Channel #2] Channel exiting idle mode
+2026/10/02 16:53:55 INFO: [core] [Channel #2 SubChannel #23] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #2 SubChannel #23] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:53:55 INFO: [core] [Channel #2 SubChannel #23] Subchannel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #2] Channel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #3] Channel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #3] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:53:55 INFO: [core] [Channel #3] Channel switches to new LB policy "round_robin"
+2026/10/02 16:53:55 INFO: [roundrobin] [0x498f1aa41590] Created
+2026/10/02 16:53:55 INFO: [core] [Channel #3 SubChannel #25] Subchannel created
+2026/10/02 16:53:55 INFO: [core] [Channel #3] Channel exiting idle mode
+2026/10/02 16:53:55 INFO: [core] [Channel #3 SubChannel #25] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #3 SubChannel #25] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:53:55 INFO: [core] [Channel #3 SubChannel #25] Subchannel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #3] Channel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #7] Channel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #7] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:53:55 INFO: [core] [Channel #7] Channel switches to new LB policy "round_robin"
+2026/10/02 16:53:55 INFO: [roundrobin] [0x498f1aa41a10] Created
+2026/10/02 16:53:55 INFO: [core] [Channel #7 SubChannel #27] Subchannel created
+2026/10/02 16:53:55 INFO: [core] [Channel #7] Channel exiting idle mode
+2026/10/02 16:53:55 INFO: [core] [Channel #7 SubChannel #27] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #7 SubChannel #27] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:53:55 INFO: [core] [Channel #7 SubChannel #27] Subchannel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #4] Channel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #7] Channel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #4] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:53:55 INFO: [core] [Channel #4] Channel switches to new LB policy "round_robin"
+2026/10/02 16:53:55 INFO: [roundrobin] [0x498f1b574630] Created
+2026/10/02 16:53:55 INFO: [core] [Channel #4 SubChannel #29] Subchannel created
+2026/10/02 16:53:55 INFO: [core] [Channel #4] Channel exiting idle mode
+2026/10/02 16:53:55 INFO: [core] [Channel #4 SubChannel #29] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #4 SubChannel #29] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:53:55 INFO: [core] [Channel #4 SubChannel #29] Subchannel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #4] Channel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #9] Channel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #9] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:53:55 INFO: [core] [Channel #9] Channel switches to new LB policy "round_robin"
+2026/10/02 16:53:55 INFO: [roundrobin] [0x498f1b574e10] Created
+2026/10/02 16:53:55 INFO: [core] [Channel #9 SubChannel #31] Subchannel created
+2026/10/02 16:53:55 INFO: [core] [Channel #9] Channel exiting idle mode
+2026/10/02 16:53:55 INFO: [core] [Channel #9 SubChannel #31] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #9 SubChannel #31] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:53:55 INFO: [core] [Channel #9 SubChannel #31] Subchannel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #9] Channel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #8] Channel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #8] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:53:55 INFO: [core] [Channel #8] Channel switches to new LB policy "round_robin"
+2026/10/02 16:53:55 INFO: [roundrobin] [0x498f1b575410] Created
+2026/10/02 16:53:55 INFO: [core] [Channel #8 SubChannel #33] Subchannel created
+2026/10/02 16:53:55 INFO: [core] [Channel #8] Channel exiting idle mode
+2026/10/02 16:53:55 INFO: [core] [Channel #8 SubChannel #33] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #8 SubChannel #33] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:53:55 INFO: [core] [Channel #8 SubChannel #33] Subchannel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #8] Channel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #10] Channel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #10] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:53:55 INFO: [core] [Channel #10] Channel switches to new LB policy "round_robin"
+2026/10/02 16:53:55 INFO: [roundrobin] [0x498f1af79830] Created
+2026/10/02 16:53:55 INFO: [core] [Channel #10 SubChannel #35] Subchannel created
+2026/10/02 16:53:55 INFO: [core] [Channel #10] Channel exiting idle mode
+2026/10/02 16:53:55 INFO: [core] [Channel #10 SubChannel #35] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #10 SubChannel #35] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:53:55 INFO: [core] [Channel #10 SubChannel #35] Subchannel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #10] Channel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #6] Channel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #6] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:53:55 INFO: [core] [Channel #6] Channel switches to new LB policy "round_robin"
+2026/10/02 16:53:55 INFO: [roundrobin] [0x498f1b7d8480] Created
+2026/10/02 16:53:55 INFO: [core] [Channel #6 SubChannel #37] Subchannel created
+2026/10/02 16:53:55 INFO: [core] [Channel #6] Channel exiting idle mode
+2026/10/02 16:53:55 INFO: [core] [Channel #6 SubChannel #37] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #6 SubChannel #37] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:53:55 INFO: [core] [Channel #6 SubChannel #37] Subchannel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #6] Channel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #11] Channel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #11] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:53:55 INFO: [core] [Channel #11] Channel switches to new LB policy "round_robin"
+2026/10/02 16:53:55 INFO: [roundrobin] [0x498f1ac81b90] Created
+2026/10/02 16:53:55 INFO: [core] [Channel #11 SubChannel #39] Subchannel created
+2026/10/02 16:53:55 INFO: [core] [Channel #11] Channel exiting idle mode
+2026/10/02 16:53:55 INFO: [core] [Channel #11 SubChannel #39] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #11 SubChannel #39] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:53:55 INFO: [core] [Channel #11 SubChannel #39] Subchannel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #11] Channel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #5] Channel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #5] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:53:55 INFO: [core] [Channel #5] Channel switches to new LB policy "round_robin"
+2026/10/02 16:53:55 INFO: [roundrobin] [0x498f1b5da750] Created
+2026/10/02 16:53:55 INFO: [core] [Channel #5 SubChannel #41] Subchannel created
+2026/10/02 16:53:55 INFO: [core] [Channel #5] Channel exiting idle mode
+2026/10/02 16:53:55 INFO: [core] [Channel #5 SubChannel #41] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #5 SubChannel #41] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:53:55 INFO: [core] [Channel #5 SubChannel #41] Subchannel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #5] Channel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #14] Channel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #14] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:53:55 INFO: [core] [Channel #14] Channel switches to new LB policy "round_robin"
+2026/10/02 16:53:55 INFO: [roundrobin] [0x498f1b800450] Created
+2026/10/02 16:53:55 INFO: [core] [Channel #14 SubChannel #43] Subchannel created
+2026/10/02 16:53:55 INFO: [core] [Channel #14] Channel exiting idle mode
+2026/10/02 16:53:55 INFO: [core] [Channel #14 SubChannel #43] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #14 SubChannel #43] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:53:55 INFO: [core] [Channel #14 SubChannel #43] Subchannel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #14] Channel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #12] Channel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #12] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:53:55 INFO: [core] [Channel #12] Channel switches to new LB policy "round_robin"
+2026/10/02 16:53:55 INFO: [roundrobin] [0x498f1b800a80] Created
+2026/10/02 16:53:55 INFO: [core] [Channel #12 SubChannel #45] Subchannel created
+2026/10/02 16:53:55 INFO: [core] [Channel #12] Channel exiting idle mode
+2026/10/02 16:53:55 INFO: [core] [Channel #12 SubChannel #45] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #12 SubChannel #45] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:53:55 INFO: [core] [Channel #12 SubChannel #45] Subchannel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #12] Channel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #16] Channel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #16] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:53:55 INFO: [core] [Channel #16] Channel switches to new LB policy "round_robin"
+2026/10/02 16:53:55 INFO: [roundrobin] [0x498f1b77e4e0] Created
+2026/10/02 16:53:55 INFO: [core] [Channel #16 SubChannel #47] Subchannel created
+2026/10/02 16:53:55 INFO: [core] [Channel #16] Channel exiting idle mode
+2026/10/02 16:53:55 INFO: [core] [Channel #16 SubChannel #47] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:53:55 INFO: [core] [Channel #16 SubChannel #47] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:53:55 INFO: [core] [Channel #16 SubChannel #47] Subchannel Connectivity change to READY
+2026/10/02 16:53:55 INFO: [core] [Channel #16] Channel Connectivity change to READY
+401 / 120000 [>________________________________________________________________________] 0.33% ? p/s801 / 120000 [>________________________________________________________________________] 0.67% ? p/s1201 / 120000 [>_______________________________________________________________________] 1.00% ? p/s1600 / 120000 [>____________________________________________________________________] 1.33% 1998 p/s2001 / 120000 [->___________________________________________________________________] 1.67% 1998 p/s2400 / 120000 [->___________________________________________________________________] 2.00% 1998 p/s2801 / 120000 [->___________________________________________________________________] 2.33% 1999 p/s3201 / 120000 [->___________________________________________________________________] 2.67% 1999 p/s3601 / 120000 [-->__________________________________________________________________] 3.00% 1999 p/s4001 / 120000 [-->__________________________________________________________________] 3.33% 1999 p/s4401 / 120000 [-->__________________________________________________________________] 3.67% 1999 p/s4801 / 120000 [-->__________________________________________________________________] 4.00% 1999 p/s5201 / 120000 [-->__________________________________________________________________] 4.33% 1999 p/s5601 / 120000 [--->_________________________________________________________________] 4.67% 1999 p/s6001 / 120000 [--->_________________________________________________________________] 5.00% 1999 p/s6401 / 120000 [--->_________________________________________________________________] 5.33% 1999 p/s6800 / 120000 [--->_________________________________________________________________] 5.67% 1999 p/s7201 / 120000 [---->________________________________________________________________] 6.00% 1999 p/s7601 / 120000 [---->________________________________________________________________] 6.33% 1999 p/s8001 / 120000 [---->________________________________________________________________] 6.67% 1999 p/s8401 / 120000 [---->________________________________________________________________] 7.00% 1999 p/s8800 / 120000 [----->_______________________________________________________________] 7.33% 1999 p/s9201 / 120000 [----->_______________________________________________________________] 7.67% 1999 p/s9601 / 120000 [----->_______________________________________________________________] 8.00% 1999 p/s10001 / 120000 [----->______________________________________________________________] 8.33% 1999 p/s10401 / 120000 [----->______________________________________________________________] 8.67% 1999 p/s10801 / 120000 [------>_____________________________________________________________] 9.00% 1999 p/s11201 / 120000 [------>_____________________________________________________________] 9.33% 1999 p/s11601 / 120000 [------>_____________________________________________________________] 9.67% 1999 p/s12001 / 120000 [------>____________________________________________________________] 10.00% 1999 p/s12401 / 120000 [------>____________________________________________________________] 10.33% 1999 p/s12801 / 120000 [------->___________________________________________________________] 10.67% 1999 p/s13201 / 120000 [------->___________________________________________________________] 11.00% 1999 p/s13601 / 120000 [------->___________________________________________________________] 11.33% 1999 p/s14001 / 120000 [------->___________________________________________________________] 11.67% 1999 p/s14401 / 120000 [-------->__________________________________________________________] 12.00% 1999 p/s14801 / 120000 [-------->__________________________________________________________] 12.33% 1999 p/s15201 / 120000 [-------->__________________________________________________________] 12.67% 1999 p/s15601 / 120000 [-------->__________________________________________________________] 13.00% 1999 p/s16001 / 120000 [-------->__________________________________________________________] 13.33% 1999 p/s16400 / 120000 [--------->_________________________________________________________] 13.67% 1999 p/s16801 / 120000 [--------->_________________________________________________________] 14.00% 1999 p/s17201 / 120000 [--------->_________________________________________________________] 14.33% 1999 p/s17601 / 120000 [--------->_________________________________________________________] 14.67% 1999 p/s18001 / 120000 [---------->________________________________________________________] 15.00% 1999 p/s18401 / 120000 [---------->________________________________________________________] 15.33% 1999 p/s18801 / 120000 [---------->________________________________________________________] 15.67% 1999 p/s19201 / 120000 [---------->________________________________________________________] 16.00% 1999 p/s19601 / 120000 [---------->________________________________________________________] 16.33% 1999 p/s20000 / 120000 [----------->_______________________________________________________] 16.67% 1999 p/s20400 / 120000 [----------->_______________________________________________________] 17.00% 1999 p/s20800 / 120000 [----------->_______________________________________________________] 17.33% 1999 p/s21201 / 120000 [----------->_______________________________________________________] 17.67% 1999 p/s21601 / 120000 [------------>______________________________________________________] 18.00% 1999 p/s22000 / 120000 [------------>______________________________________________________] 18.33% 1999 p/s22401 / 120000 [------------>______________________________________________________] 18.67% 1999 p/s22801 / 120000 [------------>______________________________________________________] 19.00% 1999 p/s23201 / 120000 [------------>______________________________________________________] 19.33% 2000 p/s23601 / 120000 [------------->_____________________________________________________] 19.67% 2000 p/s24000 / 120000 [------------->_____________________________________________________] 20.00% 2000 p/s24400 / 120000 [------------->_____________________________________________________] 20.33% 1999 p/s24801 / 120000 [------------->_____________________________________________________] 20.67% 1999 p/s25201 / 120000 [-------------->____________________________________________________] 21.00% 1999 p/s25601 / 120000 [-------------->____________________________________________________] 21.33% 2000 p/s26001 / 120000 [-------------->____________________________________________________] 21.67% 2000 p/s26401 / 120000 [-------------->____________________________________________________] 22.00% 2000 p/s26801 / 120000 [-------------->____________________________________________________] 22.33% 2000 p/s27200 / 120000 [--------------->___________________________________________________] 22.67% 2000 p/s27601 / 120000 [--------------->___________________________________________________] 23.00% 2000 p/s28001 / 120000 [--------------->___________________________________________________] 23.33% 2000 p/s28400 / 120000 [--------------->___________________________________________________] 23.67% 2000 p/s28801 / 120000 [---------------->__________________________________________________] 24.00% 2000 p/s29201 / 120000 [---------------->__________________________________________________] 24.33% 2000 p/s29601 / 120000 [---------------->__________________________________________________] 24.67% 2000 p/s30001 / 120000 [---------------->__________________________________________________] 25.00% 2000 p/s30401 / 120000 [---------------->__________________________________________________] 25.33% 2000 p/s30800 / 120000 [----------------->_________________________________________________] 25.67% 2000 p/s31201 / 120000 [----------------->_________________________________________________] 26.00% 2000 p/s31600 / 120000 [----------------->_________________________________________________] 26.33% 2000 p/s32000 / 120000 [----------------->_________________________________________________] 26.67% 2000 p/s32401 / 120000 [------------------>________________________________________________] 27.00% 2000 p/s32801 / 120000 [------------------>________________________________________________] 27.33% 2000 p/s33201 / 120000 [------------------>________________________________________________] 27.67% 2000 p/s33600 / 120000 [------------------>________________________________________________] 28.00% 2000 p/s34001 / 120000 [------------------>________________________________________________] 28.33% 2000 p/s34400 / 120000 [------------------->_______________________________________________] 28.67% 2000 p/s34801 / 120000 [------------------->_______________________________________________] 29.00% 2000 p/s35201 / 120000 [------------------->_______________________________________________] 29.33% 2000 p/s35601 / 120000 [------------------->_______________________________________________] 29.67% 2000 p/s36000 / 120000 [-------------------->______________________________________________] 30.00% 2000 p/s36400 / 120000 [-------------------->______________________________________________] 30.33% 2000 p/s36801 / 120000 [-------------------->______________________________________________] 30.67% 2000 p/s37201 / 120000 [-------------------->______________________________________________] 31.00% 2000 p/s37601 / 120000 [-------------------->______________________________________________] 31.33% 2000 p/s38001 / 120000 [--------------------->_____________________________________________] 31.67% 2000 p/s38401 / 120000 [--------------------->_____________________________________________] 32.00% 2000 p/s38801 / 120000 [--------------------->_____________________________________________] 32.33% 2000 p/s39200 / 120000 [--------------------->_____________________________________________] 32.67% 2000 p/s39601 / 120000 [---------------------->____________________________________________] 33.00% 2000 p/s40001 / 120000 [---------------------->____________________________________________] 33.33% 2000 p/s40401 / 120000 [---------------------->____________________________________________] 33.67% 2000 p/s40801 / 120000 [---------------------->____________________________________________] 34.00% 2000 p/s41201 / 120000 [----------------------->___________________________________________] 34.33% 2000 p/s41601 / 120000 [----------------------->___________________________________________] 34.67% 2000 p/s42001 / 120000 [----------------------->___________________________________________] 35.00% 2000 p/s42401 / 120000 [----------------------->___________________________________________] 35.33% 2000 p/s42801 / 120000 [----------------------->___________________________________________] 35.67% 2000 p/s43200 / 120000 [------------------------>__________________________________________] 36.00% 2000 p/s43601 / 120000 [------------------------>__________________________________________] 36.33% 2000 p/s44001 / 120000 [------------------------>__________________________________________] 36.67% 2000 p/s44401 / 120000 [------------------------>__________________________________________] 37.00% 2000 p/s44801 / 120000 [------------------------->_________________________________________] 37.33% 2000 p/s45201 / 120000 [------------------------->_________________________________________] 37.67% 2000 p/s45601 / 120000 [------------------------->_________________________________________] 38.00% 2000 p/s46001 / 120000 [------------------------->_________________________________________] 38.33% 2000 p/s46401 / 120000 [------------------------->_________________________________________] 38.67% 2000 p/s46801 / 120000 [-------------------------->________________________________________] 39.00% 2000 p/s47201 / 120000 [-------------------------->________________________________________] 39.33% 2000 p/s47601 / 120000 [-------------------------->________________________________________] 39.67% 2000 p/s48001 / 120000 [-------------------------->________________________________________] 40.00% 2000 p/s48401 / 120000 [--------------------------->_______________________________________] 40.33% 2000 p/s48800 / 120000 [--------------------------->_______________________________________] 40.67% 2000 p/s49201 / 120000 [--------------------------->_______________________________________] 41.00% 2000 p/s49601 / 120000 [--------------------------->_______________________________________] 41.33% 2000 p/s50001 / 120000 [--------------------------->_______________________________________] 41.67% 2000 p/s50401 / 120000 [---------------------------->______________________________________] 42.00% 2000 p/s50801 / 120000 [---------------------------->______________________________________] 42.33% 2000 p/s51201 / 120000 [---------------------------->______________________________________] 42.67% 2000 p/s51601 / 120000 [---------------------------->______________________________________] 43.00% 2000 p/s52001 / 120000 [----------------------------->_____________________________________] 43.33% 2000 p/s52401 / 120000 [----------------------------->_____________________________________] 43.67% 2000 p/s52801 / 120000 [----------------------------->_____________________________________] 44.00% 2000 p/s53201 / 120000 [----------------------------->_____________________________________] 44.33% 2000 p/s53601 / 120000 [----------------------------->_____________________________________] 44.67% 2000 p/s54001 / 120000 [------------------------------>____________________________________] 45.00% 2000 p/s54401 / 120000 [------------------------------>____________________________________] 45.33% 2000 p/s54801 / 120000 [------------------------------>____________________________________] 45.67% 2000 p/s55201 / 120000 [------------------------------>____________________________________] 46.00% 2000 p/s55601 / 120000 [------------------------------->___________________________________] 46.33% 2000 p/s56001 / 120000 [------------------------------->___________________________________] 46.67% 2000 p/s56401 / 120000 [------------------------------->___________________________________] 47.00% 2000 p/s56801 / 120000 [------------------------------->___________________________________] 47.33% 2000 p/s57201 / 120000 [------------------------------->___________________________________] 47.67% 2000 p/s57600 / 120000 [-------------------------------->__________________________________] 48.00% 2000 p/s58001 / 120000 [-------------------------------->__________________________________] 48.33% 2000 p/s58401 / 120000 [-------------------------------->__________________________________] 48.67% 2000 p/s58801 / 120000 [-------------------------------->__________________________________] 49.00% 2000 p/s59201 / 120000 [--------------------------------->_________________________________] 49.33% 2000 p/s59601 / 120000 [--------------------------------->_________________________________] 49.67% 2000 p/s60001 / 120000 [--------------------------------->_________________________________] 50.00% 2000 p/s60401 / 120000 [--------------------------------->_________________________________] 50.33% 2000 p/s60801 / 120000 [--------------------------------->_________________________________] 50.67% 2000 p/s61201 / 120000 [---------------------------------->________________________________] 51.00% 2000 p/s61601 / 120000 [---------------------------------->________________________________] 51.33% 2000 p/s62001 / 120000 [---------------------------------->________________________________] 51.67% 2000 p/s62401 / 120000 [---------------------------------->________________________________] 52.00% 2000 p/s62801 / 120000 [----------------------------------->_______________________________] 52.33% 2000 p/s63201 / 120000 [----------------------------------->_______________________________] 52.67% 2000 p/s63601 / 120000 [----------------------------------->_______________________________] 53.00% 2000 p/s64001 / 120000 [----------------------------------->_______________________________] 53.33% 2000 p/s64400 / 120000 [----------------------------------->_______________________________] 53.67% 2000 p/s64800 / 120000 [------------------------------------>______________________________] 54.00% 2000 p/s65201 / 120000 [------------------------------------>______________________________] 54.33% 2000 p/s65601 / 120000 [------------------------------------>______________________________] 54.67% 2000 p/s66001 / 120000 [------------------------------------>______________________________] 55.00% 2000 p/s66401 / 120000 [------------------------------------->_____________________________] 55.33% 2000 p/s66801 / 120000 [------------------------------------->_____________________________] 55.67% 2000 p/s67201 / 120000 [------------------------------------->_____________________________] 56.00% 2000 p/s67601 / 120000 [------------------------------------->_____________________________] 56.33% 2000 p/s68001 / 120000 [------------------------------------->_____________________________] 56.67% 2000 p/s68400 / 120000 [-------------------------------------->____________________________] 57.00% 2000 p/s68801 / 120000 [-------------------------------------->____________________________] 57.33% 2000 p/s69201 / 120000 [-------------------------------------->____________________________] 57.67% 2000 p/s69601 / 120000 [-------------------------------------->____________________________] 58.00% 2000 p/s70001 / 120000 [--------------------------------------->___________________________] 58.33% 2000 p/s70401 / 120000 [--------------------------------------->___________________________] 58.67% 2000 p/s70801 / 120000 [--------------------------------------->___________________________] 59.00% 2000 p/s71201 / 120000 [--------------------------------------->___________________________] 59.33% 2000 p/s71601 / 120000 [--------------------------------------->___________________________] 59.67% 2000 p/s72001 / 120000 [---------------------------------------->__________________________] 60.00% 2000 p/s72401 / 120000 [---------------------------------------->__________________________] 60.33% 2000 p/s72801 / 120000 [---------------------------------------->__________________________] 60.67% 2000 p/s73201 / 120000 [---------------------------------------->__________________________] 61.00% 2000 p/s73601 / 120000 [----------------------------------------->_________________________] 61.33% 2000 p/s74001 / 120000 [----------------------------------------->_________________________] 61.67% 2000 p/s74401 / 120000 [----------------------------------------->_________________________] 62.00% 2000 p/s74801 / 120000 [----------------------------------------->_________________________] 62.33% 2000 p/s75201 / 120000 [----------------------------------------->_________________________] 62.67% 2000 p/s75601 / 120000 [------------------------------------------>________________________] 63.00% 2000 p/s76000 / 120000 [------------------------------------------>________________________] 63.33% 2000 p/s76401 / 120000 [------------------------------------------>________________________] 63.67% 2000 p/s76801 / 120000 [------------------------------------------>________________________] 64.00% 2000 p/s77201 / 120000 [------------------------------------------->_______________________] 64.33% 2000 p/s77601 / 120000 [------------------------------------------->_______________________] 64.67% 2000 p/s78001 / 120000 [------------------------------------------->_______________________] 65.00% 2000 p/s78401 / 120000 [------------------------------------------->_______________________] 65.33% 2000 p/s78801 / 120000 [------------------------------------------->_______________________] 65.67% 2000 p/s79201 / 120000 [-------------------------------------------->______________________] 66.00% 2000 p/s79601 / 120000 [-------------------------------------------->______________________] 66.33% 2000 p/s80001 / 120000 [-------------------------------------------->______________________] 66.67% 2000 p/s80401 / 120000 [-------------------------------------------->______________________] 67.00% 2000 p/s80801 / 120000 [--------------------------------------------->_____________________] 67.33% 2000 p/s81201 / 120000 [--------------------------------------------->_____________________] 67.67% 2000 p/s81601 / 120000 [--------------------------------------------->_____________________] 68.00% 2000 p/s82001 / 120000 [--------------------------------------------->_____________________] 68.33% 2000 p/s82401 / 120000 [---------------------------------------------->____________________] 68.67% 2000 p/s82801 / 120000 [---------------------------------------------->____________________] 69.00% 2000 p/s83201 / 120000 [---------------------------------------------->____________________] 69.33% 2000 p/s83601 / 120000 [---------------------------------------------->____________________] 69.67% 2000 p/s84001 / 120000 [---------------------------------------------->____________________] 70.00% 2000 p/s84401 / 120000 [----------------------------------------------->___________________] 70.33% 2000 p/s84801 / 120000 [----------------------------------------------->___________________] 70.67% 2000 p/s85201 / 120000 [----------------------------------------------->___________________] 71.00% 2000 p/s85601 / 120000 [----------------------------------------------->___________________] 71.33% 2000 p/s86001 / 120000 [------------------------------------------------>__________________] 71.67% 2000 p/s86401 / 120000 [------------------------------------------------>__________________] 72.00% 2000 p/s86801 / 120000 [------------------------------------------------>__________________] 72.33% 2000 p/s87201 / 120000 [------------------------------------------------>__________________] 72.67% 2000 p/s87601 / 120000 [------------------------------------------------>__________________] 73.00% 2000 p/s88001 / 120000 [------------------------------------------------->_________________] 73.33% 2000 p/s88401 / 120000 [------------------------------------------------->_________________] 73.67% 2000 p/s88801 / 120000 [------------------------------------------------->_________________] 74.00% 2000 p/s89201 / 120000 [------------------------------------------------->_________________] 74.33% 2000 p/s89601 / 120000 [-------------------------------------------------->________________] 74.67% 2000 p/s90001 / 120000 [-------------------------------------------------->________________] 75.00% 2000 p/s90401 / 120000 [-------------------------------------------------->________________] 75.33% 2000 p/s90800 / 120000 [-------------------------------------------------->________________] 75.67% 2000 p/s91201 / 120000 [-------------------------------------------------->________________] 76.00% 2000 p/s91601 / 120000 [--------------------------------------------------->_______________] 76.33% 2000 p/s92001 / 120000 [--------------------------------------------------->_______________] 76.67% 2000 p/s92401 / 120000 [--------------------------------------------------->_______________] 77.00% 2000 p/s92801 / 120000 [--------------------------------------------------->_______________] 77.33% 2000 p/s93201 / 120000 [---------------------------------------------------->______________] 77.67% 2000 p/s93601 / 120000 [---------------------------------------------------->______________] 78.00% 2000 p/s94001 / 120000 [---------------------------------------------------->______________] 78.33% 2000 p/s94401 / 120000 [---------------------------------------------------->______________] 78.67% 2000 p/s94801 / 120000 [---------------------------------------------------->______________] 79.00% 2000 p/s95201 / 120000 [----------------------------------------------------->_____________] 79.33% 2000 p/s95601 / 120000 [----------------------------------------------------->_____________] 79.67% 2000 p/s96000 / 120000 [----------------------------------------------------->_____________] 80.00% 2000 p/s96401 / 120000 [----------------------------------------------------->_____________] 80.33% 2000 p/s96800 / 120000 [------------------------------------------------------>____________] 80.67% 2000 p/s97201 / 120000 [------------------------------------------------------>____________] 81.00% 2000 p/s97600 / 120000 [------------------------------------------------------>____________] 81.33% 2000 p/s98001 / 120000 [------------------------------------------------------>____________] 81.67% 2000 p/s98400 / 120000 [------------------------------------------------------>____________] 82.00% 2000 p/s98801 / 120000 [------------------------------------------------------->___________] 82.33% 2000 p/s99200 / 120000 [------------------------------------------------------->___________] 82.67% 2000 p/s99601 / 120000 [------------------------------------------------------->___________] 83.00% 2000 p/s100001 / 120000 [------------------------------------------------------->__________] 83.33% 2000 p/s100401 / 120000 [------------------------------------------------------->__________] 83.67% 2000 p/s100801 / 120000 [------------------------------------------------------->__________] 84.00% 2000 p/s101201 / 120000 [------------------------------------------------------->__________] 84.33% 2000 p/s101601 / 120000 [------------------------------------------------------->__________] 84.67% 2000 p/s102000 / 120000 [-------------------------------------------------------->_________] 85.00% 2000 p/s102401 / 120000 [-------------------------------------------------------->_________] 85.33% 2000 p/s102801 / 120000 [-------------------------------------------------------->_________] 85.67% 2000 p/s103201 / 120000 [-------------------------------------------------------->_________] 86.00% 2000 p/s103601 / 120000 [-------------------------------------------------------->_________] 86.33% 2000 p/s104001 / 120000 [--------------------------------------------------------->________] 86.67% 2000 p/s104401 / 120000 [--------------------------------------------------------->________] 87.00% 2000 p/s104801 / 120000 [--------------------------------------------------------->________] 87.33% 2000 p/s105201 / 120000 [--------------------------------------------------------->________] 87.67% 2000 p/s105601 / 120000 [---------------------------------------------------------->_______] 88.00% 2000 p/s106001 / 120000 [---------------------------------------------------------->_______] 88.33% 2000 p/s106401 / 120000 [---------------------------------------------------------->_______] 88.67% 2000 p/s106801 / 120000 [---------------------------------------------------------->_______] 89.00% 2000 p/s107201 / 120000 [---------------------------------------------------------->_______] 89.33% 2000 p/s107601 / 120000 [----------------------------------------------------------->______] 89.67% 2000 p/s108000 / 120000 [----------------------------------------------------------->______] 90.00% 2000 p/s108401 / 120000 [----------------------------------------------------------->______] 90.33% 2000 p/s108800 / 120000 [----------------------------------------------------------->______] 90.67% 2000 p/s109201 / 120000 [------------------------------------------------------------>_____] 91.00% 2000 p/s109601 / 120000 [------------------------------------------------------------>_____] 91.33% 2000 p/s110001 / 120000 [------------------------------------------------------------>_____] 91.67% 2000 p/s110401 / 120000 [------------------------------------------------------------>_____] 92.00% 2000 p/s110801 / 120000 [------------------------------------------------------------>_____] 92.33% 2000 p/s111201 / 120000 [------------------------------------------------------------->____] 92.67% 2000 p/s111601 / 120000 [------------------------------------------------------------->____] 93.00% 2000 p/s112001 / 120000 [------------------------------------------------------------->____] 93.33% 2000 p/s112401 / 120000 [------------------------------------------------------------->____] 93.67% 2000 p/s112800 / 120000 [-------------------------------------------------------------->___] 94.00% 2000 p/s113201 / 120000 [-------------------------------------------------------------->___] 94.33% 2000 p/s113601 / 120000 [-------------------------------------------------------------->___] 94.67% 2000 p/s114001 / 120000 [-------------------------------------------------------------->___] 95.00% 2000 p/s114401 / 120000 [-------------------------------------------------------------->___] 95.33% 2000 p/s114801 / 120000 [--------------------------------------------------------------->__] 95.67% 2000 p/s115201 / 120000 [--------------------------------------------------------------->__] 96.00% 2000 p/s115601 / 120000 [--------------------------------------------------------------->__] 96.33% 2000 p/s116001 / 120000 [--------------------------------------------------------------->__] 96.67% 2000 p/s116401 / 120000 [---------------------------------------------------------------->_] 97.00% 2000 p/s116801 / 120000 [---------------------------------------------------------------->_] 97.33% 2000 p/s117200 / 120000 [---------------------------------------------------------------->_] 97.67% 2000 p/s117601 / 120000 [---------------------------------------------------------------->_] 98.00% 2000 p/s118001 / 120000 [---------------------------------------------------------------->_] 98.33% 2000 p/s118401 / 120000 [----------------------------------------------------------------->] 98.67% 2000 p/s118801 / 120000 [----------------------------------------------------------------->] 99.00% 2000 p/s119201 / 120000 [----------------------------------------------------------------->] 99.33% 2000 p/s119601 / 120000 [----------------------------------------------------------------->] 99.67% 2000 p/s120000 / 120000 [-----------------------------------------------------------------] 100.00% 2007 p/s
+Summary:
+  Total:	59.9995 secs.
+  Slowest:	0.0342 secs.
+  Fastest:	0.0020 secs.
+  Average:	0.0320 secs.
+  Stddev:	0.0005 secs.
+  Requests/sec:	2000.0170
+
+Response time histogram:
+  0.0020 [1]	|
+  0.0052 [9]	|
+  0.0085 [6]	|
+  0.0117 [8]	|
+  0.0149 [6]	|
+  0.0181 [7]	|
+  0.0213 [6]	|
+  0.0245 [7]	|
+  0.0278 [7]	|
+  0.0310 [198]	|
+  0.0342 [119745]	|∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎
+
+Latency distribution:
+  10% in 0.0319 secs.
+  25% in 0.0320 secs.
+  50% in 0.0320 secs.
+  75% in 0.0320 secs.
+  90% in 0.0321 secs.
+  95% in 0.0321 secs.
+  99% in 0.0327 secs.
+  99.9% in 0.0331 secs.

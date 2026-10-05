@@ -1,0 +1,179 @@
+2026/10/02 16:55:12 INFO: [core] original dial target is: "etcd-endpoints://0x6b6ce6660400/127.0.0.1:23379"
+2026/10/02 16:55:12 INFO: [core] [Channel #2] Channel created for target "etcd-endpoints://0x6b6ce6660400/127.0.0.1:23379"
+2026/10/02 16:55:12 INFO: [core] [Channel #2] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x6b6ce6660400", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:55:12 INFO: [core] [Channel #2] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:55:12 INFO: [core] original dial target is: "etcd-endpoints://0x6b6ce66b2200/127.0.0.1:23379"
+2026/10/02 16:55:12 INFO: [core] [Channel #3] Channel created for target "etcd-endpoints://0x6b6ce66b2200/127.0.0.1:23379"
+2026/10/02 16:55:12 INFO: [core] [Channel #3] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x6b6ce66b2200", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:55:12 INFO: [core] [Channel #3] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:55:12 INFO: [core] original dial target is: "etcd-endpoints://0x6b6ce6660000/127.0.0.1:23379"
+2026/10/02 16:55:12 INFO: [core] [Channel #4] Channel created for target "etcd-endpoints://0x6b6ce6660000/127.0.0.1:23379"
+2026/10/02 16:55:12 INFO: [core] [Channel #4] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"etcd-endpoints", Opaque:"", User:(*url.Userinfo)(nil), Host:"0x6b6ce6660000", Path:"/127.0.0.1:23379", Fragment:"", RawQuery:"", RawPath:"", RawFragment:"", ForceQuery:false, OmitHost:false}}
+2026/10/02 16:55:12 INFO: [core] [Channel #4] Channel authority set to "127.0.0.1:23379"
+2026/10/02 16:55:12 INFO: [core] [Channel #4] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:12 INFO: [core] [Channel #4] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:12 INFO: [core] [Channel #4] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:12 INFO: [roundrobin] [0x6b6ce68ef230] Created
+2026/10/02 16:55:12 INFO: [core] [Channel #4 SubChannel #5] Subchannel created
+2026/10/02 16:55:12 INFO: [core] [Channel #4] Channel exiting idle mode
+2026/10/02 16:55:12 INFO: [core] [Channel #4 SubChannel #5] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:12 INFO: [core] [Channel #4 SubChannel #5] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:12 INFO: [core] [Channel #4 SubChannel #5] Subchannel Connectivity change to READY
+2026/10/02 16:55:12 INFO: [core] [Channel #4] Channel Connectivity change to READY
+2026/10/02 16:55:12 INFO: [core] [Channel #1] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:12 INFO: [core] [Channel #1] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:12 INFO: [core] [Channel #1] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:12 INFO: [roundrobin] [0x6b6ce6906900] Created
+2026/10/02 16:55:12 INFO: [core] [Channel #1 SubChannel #7] Subchannel created
+2026/10/02 16:55:12 INFO: [core] [Channel #1] Channel exiting idle mode
+2026/10/02 16:55:12 INFO: [core] [Channel #1 SubChannel #7] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:12 INFO: [core] [Channel #1 SubChannel #7] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:12 INFO: [core] [Channel #1 SubChannel #7] Subchannel Connectivity change to READY
+2026/10/02 16:55:12 INFO: [core] [Channel #1] Channel Connectivity change to READY
+2026/10/02 16:55:12 INFO: [core] [Channel #2] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:12 INFO: [core] [Channel #2] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:12 INFO: [core] [Channel #2] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:12 INFO: [roundrobin] [0x6b6ce65509c0] Created
+2026/10/02 16:55:12 INFO: [core] [Channel #2 SubChannel #9] Subchannel created
+2026/10/02 16:55:12 INFO: [core] [Channel #2] Channel exiting idle mode
+2026/10/02 16:55:12 INFO: [core] [Channel #2 SubChannel #9] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:12 INFO: [core] [Channel #2 SubChannel #9] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:12 INFO: [core] [Channel #2 SubChannel #9] Subchannel Connectivity change to READY
+2026/10/02 16:55:12 INFO: [core] [Channel #2] Channel Connectivity change to READY
+2026/10/02 16:55:12 INFO: [core] [Channel #3] Channel Connectivity change to CONNECTING
+2026/10/02 16:55:12 INFO: [core] [Channel #3] Resolver state updated: {
+  "Addresses": null,
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "127.0.0.1:23379",
+          "ServerName": "127.0.0.1:23379",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": {
+    "Config": {
+      "Config": null,
+      "Methods": {}
+    },
+    "Err": null
+  },
+  "Attributes": null
+} (service config updated)
+2026/10/02 16:55:12 INFO: [core] [Channel #3] Channel switches to new LB policy "round_robin"
+2026/10/02 16:55:12 INFO: [roundrobin] [0x6b6ce6c07260] Created
+2026/10/02 16:55:12 INFO: [core] [Channel #3 SubChannel #11] Subchannel created
+2026/10/02 16:55:12 INFO: [core] [Channel #3] Channel exiting idle mode
+2026/10/02 16:55:12 INFO: [core] [Channel #3 SubChannel #11] Subchannel Connectivity change to CONNECTING
+2026/10/02 16:55:12 INFO: [core] [Channel #3 SubChannel #11] Subchannel picks a new address "127.0.0.1:23379" to connect
+2026/10/02 16:55:12 INFO: [core] [Channel #3 SubChannel #11] Subchannel Connectivity change to READY
+2026/10/02 16:55:12 INFO: [core] [Channel #3] Channel Connectivity change to READY
+100 / 3000 [-->________________________________________________________________________] 3.33% ? p/s200 / 3000 [---->______________________________________________________________________] 6.67% ? p/s300 / 3000 [------->__________________________________________________________________] 10.00% ? p/s396 / 3000 [--------->______________________________________________________________] 13.20% 492 p/s500 / 3000 [----------->____________________________________________________________] 16.67% 492 p/s600 / 3000 [-------------->_________________________________________________________] 20.00% 492 p/s700 / 3000 [---------------->_______________________________________________________] 23.33% 493 p/s799 / 3000 [------------------->____________________________________________________] 26.63% 493 p/s900 / 3000 [--------------------->__________________________________________________] 30.00% 493 p/s1000 / 3000 [----------------------->_______________________________________________] 33.33% 494 p/s1100 / 3000 [-------------------------->____________________________________________] 36.67% 494 p/s1199 / 3000 [---------------------------->__________________________________________] 39.97% 494 p/s1300 / 3000 [------------------------------>________________________________________] 43.33% 494 p/s1400 / 3000 [--------------------------------->_____________________________________] 46.67% 494 p/s1500 / 3000 [----------------------------------->___________________________________] 50.00% 494 p/s1600 / 3000 [------------------------------------->_________________________________] 53.33% 494 p/s1700 / 3000 [---------------------------------------->______________________________] 56.67% 494 p/s1800 / 3000 [------------------------------------------>____________________________] 60.00% 494 p/s1900 / 3000 [-------------------------------------------->__________________________] 63.33% 495 p/s2000 / 3000 [----------------------------------------------->_______________________] 66.67% 495 p/s2100 / 3000 [------------------------------------------------->_____________________] 70.00% 495 p/s2200 / 3000 [---------------------------------------------------->__________________] 73.33% 495 p/s2300 / 3000 [------------------------------------------------------>________________] 76.67% 495 p/s2400 / 3000 [-------------------------------------------------------->______________] 80.00% 495 p/s2500 / 3000 [----------------------------------------------------------->___________] 83.33% 495 p/s2600 / 3000 [------------------------------------------------------------->_________] 86.67% 495 p/s2700 / 3000 [--------------------------------------------------------------->_______] 90.00% 495 p/s2800 / 3000 [------------------------------------------------------------------>____] 93.33% 496 p/s2900 / 3000 [-------------------------------------------------------------------->__] 96.67% 496 p/s3000 / 3000 [----------------------------------------------------------------------] 100.00% 517 p/s
+Summary:
+  Total:	5.9987 secs.
+  Slowest:	0.0534 secs.
+  Fastest:	0.0019 secs.
+  Average:	0.0319 secs.
+  Stddev:	0.0023 secs.
+  Requests/sec:	500.1116
+
+Response time histogram:
+  0.0019 [1]	|
+  0.0070 [2]	|
+  0.0122 [5]	|
+  0.0173 [8]	|
+  0.0225 [12]	|
+  0.0277 [25]	|
+  0.0328 [2757]	|∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎
+  0.0380 [162]	|∎∎
+  0.0431 [15]	|
+  0.0483 [9]	|
+  0.0534 [4]	|
+
+Latency distribution:
+  10% in 0.0315 secs.
+  25% in 0.0319 secs.
+  50% in 0.0320 secs.
+  75% in 0.0321 secs.
+  90% in 0.0325 secs.
+  95% in 0.0331 secs.
+  99% in 0.0377 secs.
+  99.9% in 0.0499 secs.
