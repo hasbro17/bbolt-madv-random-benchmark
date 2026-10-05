@@ -64,6 +64,8 @@ Random point reads, 500-key range reads and a full list of all keys, at 16, 64 a
 
 5 pairs, no memory limit.
 
+<details><summary>Full table (19 measures)</summary>
+
 | Measure | Control (median run) | Treatment (median run) | Treatment vs control (median pair) | Range over pairs |
 |---|--:|--:|--:|--:|
 | Point reads, 16 clients: throughput | 43,787/s | 43,849/s | -0.3% | -1.9% to +0.7% |
@@ -86,11 +88,17 @@ Random point reads, 500-key range reads and a full list of all keys, at 16, 64 a
 | 500-key range reads (serializable), 256 clients: p99 latency | 4,654 ms | 4,820 ms | +0.2% | -19.5% to +15.0% |
 | Full list of all keys: time per list | 3,295 ms | 3,218 ms | -2.0% | -3.9% to +4.5% |
 
+</details>
+
 ## S1-long: the same point reads, 10 times longer
 
 **Result:** No difference with longer runs either: point-read throughput within -1.1% to -0.5% of control, and p99 latency unchanged (0.0% at every client count).
 
 S1's point-read runs are short (20,000, 80,000 and 320,000 requests: 0.5, 1.2 and 4.3 seconds). S1-long repeats S1 with 10 times as many requests (about 4, 11 and 42 seconds), to make sure the short runs did not hide a difference.
+
+5 pairs, no memory limit.
+
+<details><summary>Full table (6 measures)</summary>
 
 | Measure | Treatment vs control (median pair) | Range over pairs |
 |---|--:|--:|
@@ -101,7 +109,7 @@ S1's point-read runs are short (20,000, 80,000 and 320,000 requests: 0.5, 1.2 an
 | Point reads, 256 clients: throughput | -0.5% | -1.7% to +2.5% |
 | Point reads, 256 clients: p99 latency | 0.0% | -3.0% to +2.0% |
 
-5 pairs, no memory limit.
+</details>
 
 ## S2: reads under memory pressure
 
@@ -114,6 +122,8 @@ The same reads as S1 under the memory limit, followed by 10 minutes of steady po
 ![s2-p99](charts/s2-p99.png)
 
 10 pairs, memory limit 5.09 GiB.
+
+<details><summary>Full table (24 measures)</summary>
 
 | Measure | Control (median run) | Treatment (median run) | Treatment vs control (median pair) | Range over pairs | Range over pairs in S1 (no memory limit) |
 |---|--:|--:|--:|--:|--:|
@@ -142,6 +152,8 @@ The same reads as S1 under the memory limit, followed by 10 minutes of steady po
 | Major page faults, whole run | 519,162 | 4 | -100.0% | -100.0% to -100.0% | n/a |
 | Disk read, whole run | 2,057 MiB | 0.00 MiB | -100.0% | -100.0% to -100.0% | n/a |
 
+</details>
+
 ## S2 follow-up: memory below the working set, and readahead
 
 **Result:** With a 4 MiB readahead, large reads get slower (full list 6.5x slower, p99 of point reads at 256 clients 2.2x slower); with the 128 KiB default, treatment is faster (full list 5.3x faster).
@@ -157,6 +169,8 @@ Control is not affected by this setting, because `MADV_RANDOM` turns readahead o
 
 ![s2-tight-readahead](charts/s2-tight-readahead.png)
 
+<details><summary>Full table (9 measures)</summary>
+
 | Measure | 4 MiB readahead: treatment vs control | Range over pairs | 128 KiB readahead: treatment vs control | Range over pairs |
 |---|--:|--:|--:|--:|
 | Point reads, 16 clients: throughput | +90.4% | +87.5% to +92.9% | +60.8% | +60.0% to +64.0% |
@@ -168,6 +182,8 @@ Control is not affected by this setting, because `MADV_RANDOM` turns readahead o
 | 500-key range reads (10-min pass, fixed rate): p99 latency | 5.0x | 3.3x to 11.1x | +1.7% | -43.8% to +16.2% |
 | Disk read, whole run | 77.4x | 76.8x to 95.8x | +68.6% | +65.1% to +80.5% |
 | Major page faults, whole run | -84.9% | -89.3% to -80.4% | -59.8% | -61.2% to -57.8% |
+
+</details>
 
 4 MiB: 3 pairs. 128 KiB: 3 pairs. Same scenario and limit; only the readahead setting of the data disk differs. The two settings ran on two different VMs, so only the treatment / control ratios are compared, never the absolute numbers.
 
@@ -185,12 +201,16 @@ etcd starts on a database holding 1,050,000 old revisions, the memory limit is a
 
 10 pairs, memory limit 5.09 GiB.
 
+<details><summary>Full table (4 measures)</summary>
+
 | Measure | Control (median run) | Treatment (median run) | Treatment vs control (median pair) | Range over pairs |
 |---|--:|--:|--:|--:|
 | Compaction time | 773 s | 65.1 s | -91.6% | -94.0% to -90.6% |
 | Major page faults during compaction | 995,357 | 261 | -100.0% | -100.0% to -100.0% |
 | Disk read during compaction | 4,027 MiB | 8,197 MiB | +103.4% | +41.5% to +127.9% |
 | Backend commit p99 latency | 4.00 ms | 64.0 ms | 16.0x | 16.0x to 16.0x |
+
+</details>
 
 Treatment reads more bytes from disk than control, but in large readahead chunks instead of one 4 KiB page per fault, which is why it is much faster. There is no client traffic in S3a, so "backend commit p99 latency" covers only the compaction's own batch commits (about 2,450 per run); etcd reports it in coarse buckets (4, 8, 16, 32, 64 ms, ...), so the values are bucket bounds. Treatment does those commits in about a minute while readahead keeps the disk busy, so some of them wait longer. Client writes during compaction are measured in S3b.
 
@@ -218,6 +238,8 @@ The same compaction with no memory limit. Both builds compact equally fast, so t
 
 5 pairs, memory limit 5.09 GiB.
 
+<details><summary>Full table (10 measures)</summary>
+
 | Measure | Control (median run) | Treatment (median run) | Treatment vs control (median pair) | Range over pairs |
 |---|--:|--:|--:|--:|
 | Writes: throughput | 704/s | 858/s | +21.7% | +21.2% to +22.0% |
@@ -231,6 +253,8 @@ The same compaction with no memory limit. Both builds compact equally fast, so t
 | Major page faults per second | 392/s | 0.00/s | -100.0% | -100.0% to -100.0% |
 | Disk read per second | 1.57 MiB/s | 0.00 MiB/s | -100.0% | -100.0% to -100.0% |
 
+</details>
+
 In every control run the stall is the first compaction after the memory limit is applied (236 s to 238 s). After it, control's next four compactions are shorter than treatment's at the same point (5.4 s to 6.2 s, against 13.6 s to 18.7 s for treatment), and then both builds settle at about 19 s per compaction.
 
 ## S3b without a memory limit
@@ -241,6 +265,8 @@ The same workload with no memory limit: both builds are equal.
 
 3 pairs, no memory limit.
 
+<details><summary>Full table (5 measures)</summary>
+
 | Measure | Control (median run) | Treatment (median run) | Treatment vs control (median pair) | Range over pairs |
 |---|--:|--:|--:|--:|
 | Writes: throughput | 860/s | 859/s | -0.1% | -0.5% to +0.2% |
@@ -248,6 +274,8 @@ The same workload with no memory limit: both builds are equal.
 | Slowest compaction | 19.1 s | 19.1 s | +0.3% | -0.2% to +2.7% |
 | Mean compaction time | 17.7 s | 17.7 s | +0.2% | -0.6% to +1.9% |
 | Median compaction time | 18.7 s | 18.8 s | +0.8% | +0.7% to +1.8% |
+
+</details>
 
 ## S4: etcd's rw-benchmark.sh
 

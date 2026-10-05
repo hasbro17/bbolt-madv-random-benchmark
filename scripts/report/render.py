@@ -603,6 +603,15 @@ S2_TIGHT_ROWS = [(k, label(k)) for k in (
     "list-paginate.avg_ms", "mixed-range500.p99_ms", "read_mib_total", "majflt_total")]
 
 
+def fold(table):
+    """A markdown table inside a collapsed <details>, so skimming readers pass it in one line."""
+    lines = table.splitlines() if isinstance(table, str) else list(table)
+    n = len(lines) - 2
+    if n <= 2:  # a one- or two-row table is shorter than the fold itself
+        return lines
+    return [f"<details><summary>Full table ({n} measures)</summary>", ""] + lines + ["", "</details>"]
+
+
 def s2_tight_section(t, chart=None, res=()):
     """S2 with the memory limit below the working set, at two readahead sizes."""
     if not t or not any(t.values()):
@@ -618,13 +627,14 @@ def s2_tight_section(t, chart=None, res=()):
            "- with the kernel default, `read_ahead_kb=128` (128 KiB).", "",
            "Control is not affected by this setting, because `MADV_RANDOM` turns readahead off. Values are treatment "
            "against control per pair: for throughput higher is better; for time, latency, disk reads and faults lower "
-           "is better.", ""] + (fig(chart) if chart else []) + [
-           "| Measure | 4 MiB readahead: treatment vs control | Range over pairs | 128 KiB readahead: treatment vs "
-           "control | Range over pairs |", "|---|--:|--:|--:|--:|"]
+           "is better.", ""] + (fig(chart) if chart else [])
+    table = ["| Measure | 4 MiB readahead: treatment vs control | Range over pairs | 128 KiB readahead: treatment vs "
+             "control | Range over pairs |", "|---|--:|--:|--:|--:|"]
     for k, lbl in S2_TIGHT_ROWS:
         ca, ra = _ratio_cells(a and a["metrics"], k)
         cb, rb = _ratio_cells(b and b["metrics"], k)
-        out.append(f"| {lbl} | {ca} | {ra} | {cb} | {rb} |")
+        table.append(f"| {lbl} | {ca} | {ra} | {cb} | {rb} |")
+    out += fold(table)
 
     def who(x):
         return f"{x['n_pairs']} pairs" if x else "not run"
@@ -668,12 +678,12 @@ def s1_long_section(t, res=()):
     out = ["## S1-long: the same point reads, 10 times longer", ""] + list(res) + [
            "S1's point-read runs are short (20,000, 80,000 and 320,000 requests: 0.5, 1.2 and 4.3 seconds). S1-long "
            "repeats S1 with 10 times as many requests (about 4, 11 and 42 seconds), to make sure the short runs did "
-           "not hide a difference.", "",
-           "| Measure | Treatment vs control (median pair) | Range over pairs |", "|---|--:|--:|"]
+           "not hide a difference.", "", f"{t['n_pairs']} pairs, no memory limit.", ""]
+    table = ["| Measure | Treatment vs control (median pair) | Range over pairs |", "|---|--:|--:|"]
     for k in sorted(t["metrics"], key=sort_key):
         c, r = _ratio_cells(t["metrics"], k)
-        out.append(f"| {label(k)} | {c} | {r} |")
-    out += ["", f"{t['n_pairs']} pairs, no memory limit.", ""]
+        table.append(f"| {label(k)} | {c} | {r} |")
+    out += fold(table) + [""]
     return out
 
 
@@ -1053,8 +1063,9 @@ def build(agg, outdir, env_dir, infra_dir, draft, supp=None):
         keys = sorted((k for k in s["summary"] if keys_filter(k) and not limiter_latency(k)), key=sort_key)
         caps = ", ".join(gib(c) for c in s.get("caps", [])) or "n/a"
         caps = "no memory limit" if caps == "none" else f"memory limit {caps}"
-        md.extend([f"{s['n_pairs']} pairs, {caps}.", "",
-                   metric_table(s["summary"], keys, unit_of, ref, ref_label), ""])
+        table = metric_table(s["summary"], keys, unit_of, ref, ref_label)
+        md.extend([f"{s['n_pairs']} pairs, {caps}.", ""]
+                  + (fold(table) if title not in MORE_RESULTS else [table]) + [""])
         if after:
             md.extend([after, ""])
 
@@ -1369,8 +1380,7 @@ def render_html(vs, by_name, agg, report_md, when, draft):
                 chunks.append(f"<details><summary>{inline(m2.group(1))}</summary>" if m2 else line)
             else:
                 if table:
-                    chunks.append(f"<details open><summary>Table</summary>{md_table_to_html(chr(10).join(table))}</details>"
-                                  if len(table) > 8 else md_table_to_html("\n".join(table)))
+                    chunks.append(md_table_to_html("\n".join(table)))
                     table = []
                 if line.strip():
                     chunks.append(f"<p>{inline(line.lstrip('- '))}</p>")
